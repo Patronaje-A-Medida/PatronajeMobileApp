@@ -14,8 +14,7 @@ part 'sign_in_client_bloc.freezed.dart';
 class SignInClientBloc extends Bloc<SignInClientEvent, SignInClientState> {
   final IAuthFacade _authFacade;
 
-  SignInClientBloc(SignInClientState initialState, this._authFacade)
-      : super(initialState);
+  SignInClientBloc(this._authFacade) : super(SignInClientState.initial());
 
   /*SignInClientBloc() : super(SignInClientState.initial()) {
     on<SignInClientEvent>((event, emit) {
@@ -23,10 +22,10 @@ class SignInClientBloc extends Bloc<SignInClientEvent, SignInClientState> {
     });
   }*/
 
-  @override
+  //@override
   SignInClientState get initialState => SignInClientState.initial();
 
-  @override
+  //@override
   Stream<SignInClientState> mapEventToState(
     SignInClientEvent event,
   ) async* {
@@ -56,7 +55,7 @@ class SignInClientBloc extends Bloc<SignInClientEvent, SignInClientState> {
             authFailureOrSuccessOption: none(),
           );
 
-          failureOrSuccess = await _authFacade.signUp(
+          failureOrSuccess = await _authFacade.signIn(
             emailAddress: state.emailAddress,
             password: state.password,
           );

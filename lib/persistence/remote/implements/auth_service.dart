@@ -6,6 +6,8 @@ import 'package:patronaje_mobile_app/persistence/remote/interfaces/i_auth_facade
 
 @LazySingleton(as: IAuthFacade)
 class AuthService implements IAuthFacade {
+  AuthService();
+
   @override
   Future<Either<AuthFailure, Unit>> signIn(
       {required EmailAddress emailAddress, required Password password}) async {
@@ -14,6 +16,7 @@ class AuthService implements IAuthFacade {
 
     try {
       // http.post
+      print('sign in service');
       return right(unit);
     } catch (e) {
       // if e.code -> code.server_error ||code.invalid_email
@@ -22,13 +25,21 @@ class AuthService implements IAuthFacade {
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> signUp(
-      {required EmailAddress emailAddress, required Password password}) async {
+  Future<Either<AuthFailure, Unit>> signUp({
+    required NamesUser name,
+    required NamesUser lastName,
+    required EmailAddress emailAddress,
+    required Password password,
+    required Phone phone,
+    required Height height,
+  }) async {
     final email = emailAddress.getOrCrash();
     final pwd = password.getOrCrash();
+    final hght = height.getOrCrash();
 
     try {
       // http.post
+      print('sign up service');
       return right(unit);
     } catch (e) {
       // if e.code -> code.server_error ||code.invalid_email
