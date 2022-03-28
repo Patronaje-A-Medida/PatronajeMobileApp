@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class FilledPrimaryButton extends StatelessWidget {
   final String text;
   final Size minimunSize;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   const FilledPrimaryButton({
     Key? key,

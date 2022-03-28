@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:patronaje_mobile_app/business/auth/sign_up_client/bloc/sign_up_client_bloc.dart';
-import 'package:patronaje_mobile_app/presentation/dependencies/injections.dart';
+import 'package:patronaje_mobile_app/business/shared/sign_up_form_provider.dart';
 import 'package:patronaje_mobile_app/presentation/sign_up/widgets/sign_up_form.dart';
+import 'package:provider/provider.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -28,6 +27,8 @@ class SignUpPage extends StatelessWidget {
               size: 18,
             ),
             onPressed: () {
+              Provider.of<SignUpFormProvider>(context, listen: false)
+                  .termsAndConditions = false;
               Navigator.pop(context);
             },
           ),
@@ -38,11 +39,7 @@ class SignUpPage extends StatelessWidget {
             color: Colors.white,
             padding: const EdgeInsets.all(24),
             width: double.infinity,
-            child: BlocProvider(
-              create: (context) => getIt<SignUpClientBloc>()
-                ..add(const SignUpClientEvent.start()),
-              child: const SignUpForm(),
-            ),
+            child: const SignUpForm(),
           ),
         ),
       ),
