@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:patronaje_mobile_app/presentation/sign_in/sign_in_page.dart';
 import 'package:patronaje_mobile_app/presentation/welcome/welcome_page.dart';
+import 'package:patronaje_mobile_app/presentation/user_instructions/instructions_screen.dart';
+import 'user_take_photos/user_take_photos.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({Key? key}) : super(key: key);
@@ -23,7 +25,7 @@ class AppWidget extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.pink,
       ),
-      home: const WelcomePage(),
+      home: TakePhotos(),
     );
   }
 }
