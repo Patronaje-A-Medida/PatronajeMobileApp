@@ -1,13 +1,31 @@
 import 'dart:convert';
 
-class UserLogin {
-  final String email;
-  final String password;
+//import 'dart:convert';
 
-  const UserLogin(
-    this.email,
-    this.password,
-  );
+//import 'package:freezed_annotation/freezed_annotation.dart';
+
+//part 'user_login.freezed.dart';
+//part 'user_login.g.dart';
+
+//@freezed
+class UserLogin {
+  String email;
+  String password;
+
+  UserLogin({
+    required this.email,
+    required this.password,
+  });
+
+  UserLogin copyWith({
+    String? email,
+    String? password,
+  }) {
+    return UserLogin(
+      email: email ?? this.email,
+      password: password ?? this.password,
+    );
+  }
 
   Map<String, dynamic> toMap() {
     return {
@@ -18,8 +36,8 @@ class UserLogin {
 
   factory UserLogin.fromMap(Map<String, dynamic> map) {
     return UserLogin(
-      map['email'],
-      map['password'],
+      email: map['email'],
+      password: map['password'],
     );
   }
 
@@ -32,10 +50,12 @@ class UserLogin {
   String toString() => 'UserLogin(email: $email, password: $password)';
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-    return o is UserLogin && o.email == email && o.password == password;
+    return other is UserLogin &&
+        other.email == email &&
+        other.password == password;
   }
 
   @override
