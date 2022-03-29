@@ -32,7 +32,8 @@ class UserLocalDataProvider extends ChangeNotifier {
     final UserLocalData userLocalData = UserLocalData(
       id: userClientToken.userInfo.id,
       email: userClientToken.userInfo.email,
-      names: userClientToken.userInfo.nameUser,
+      names:
+          '${userClientToken.userInfo.nameUser} ${userClientToken.userInfo.lastNameUser}',
       height: userClientToken.userInfo.height,
       phone: userClientToken.userInfo.phone,
       token: userClientToken.userToken.token,
