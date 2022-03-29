@@ -46,38 +46,49 @@ class _CameraPageState extends State<CameraPage> {
     return Column(
       children: [
         Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(
-              child: SizedBox(
-                height: 300,
-                width: 300,
-                child: CameraPreview(controller),
-              ),
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: SizedBox(
+              height: 300,
+              width: 300,
+              child: CameraPreview(controller),
             ),
+          ),
         ),
         Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: () async{
-                pictureFile = await controller.takePicture();
-                setState(() {});
-              },
-              child: const Text('Tomar Foto!'),
-            ),
-        ),
-        Row(
-          children: <Widget>[
-            TextButton(
-                onPressed: () {},
-                child: const Text('Volver'))
-          ],
+          padding: const EdgeInsets.all(8.0),
+          child: ElevatedButton(
+            onPressed: () async{
+              pictureFile = await controller.takePicture();
+              setState(() {});
+            },
+            child: const Text('Tomar Foto!'),
+          ),
         ),
         if (pictureFile != null)
           Image.network(
             pictureFile!.path,
             height: 180,
-          )
+          ),
+        Row(
+          children: <Widget>[
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) => TakePhotos())
+                  );
+                },
+                child: const Text('Volver'),
+                style: TextButton.styleFrom(
+                    textStyle: const TextStyle(fontSize: 18),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    )))
+          ],
+        ),
       ],
     );
   }
 }
+
