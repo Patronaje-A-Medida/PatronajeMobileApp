@@ -21,19 +21,18 @@ class AuthRepository extends BaseAuthRepository {
       final response = await _dio.post(url, data: request);
 
       if (response.statusCode != 200) {
-        throw Exception('bad request');
+        final errorResponse = ErrorDetail.fromMap(response.data);
+        throw GeneralException.fromErrorResponse(errorResponse);
       }
 
-      final userClientToken = UserClientToken.fromJson(response.data);
+      final userClientToken = UserClientToken.fromMap(response.data);
       return userClientToken;
     } on DioError catch (err) {
-      print('dio error signin ${err.message}');
-      throw Exception('dio error');
+      final errorResponse = ErrorDetail.fromMap(err.response?.data);
+      throw GeneralException.fromErrorResponse(errorResponse);
     } on SocketException catch (err) {
-      print('socket error signin ${err.message}');
-      throw Exception('socket error');
+      throw GeneralException(message: err.message, errorCode: 500);
     } on Exception catch (_) {
-      print('error api ? ');
       rethrow;
     }
   }
