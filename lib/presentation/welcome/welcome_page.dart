@@ -4,6 +4,7 @@ import 'package:patronaje_mobile_app/presentation/shared/outlined_secondary_butt
 import 'package:patronaje_mobile_app/presentation/shared/transition_page_route.dart';
 import 'package:patronaje_mobile_app/presentation/sign_in/sign_in_page.dart';
 import 'package:patronaje_mobile_app/presentation/sign_up/sign_up_page.dart';
+import 'package:patronaje_mobile_app/presentation/user_instructions/instructions_screen.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -61,7 +62,7 @@ class WelcomePage extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).push(
                         TransitionPageRoute(
-                          child: const SignInPage(),
+                          child: Instructions(),
                           direction: AxisDirection.left,
                         ),
                       );

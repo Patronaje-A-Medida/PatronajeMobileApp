@@ -13,20 +13,22 @@ class Instructions extends StatefulWidget {
 
 class _InstructionsState extends State<Instructions> {
   int _currentPage = 0;
-  final PageController _pageController = PageController(
-    initialPage: 0
-  );
+  final PageController _pageController = PageController(initialPage: 0);
 
   @override
   void initState() {
     super.initState();
-    Timer.periodic(Duration(seconds: 5), (Timer timer){
-      if(_currentPage < 3){
+    Timer.periodic(Duration(seconds: 5), (Timer timer) {
+      if (_currentPage < 3) {
         _currentPage++;
-      }else{
+      } else {
         _currentPage = 0;
       }
-      _pageController.animateToPage(_currentPage, duration: Duration(milliseconds: 300), curve: Curves.easeIn,);
+      _pageController.animateToPage(
+        _currentPage,
+        duration: Duration(milliseconds: 300),
+        curve: Curves.easeIn,
+      );
     });
   }
 
@@ -36,23 +38,23 @@ class _InstructionsState extends State<Instructions> {
     _pageController.dispose();
   }
 
-  _onPageChanged(int index){
+  _onPageChanged(int index) {
     setState(() {
       _currentPage = index;
     });
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         color: Colors.pinkAccent,
         child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: Stack(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                  child: Stack(
                 alignment: AlignmentDirectional.bottomCenter,
                 children: <Widget>[
                   PageView.builder(
@@ -71,8 +73,8 @@ class _InstructionsState extends State<Instructions> {
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            for(int i = 0; i<slideList.length; i++)
-                              if(i == _currentPage)
+                            for (int i = 0; i < slideList.length; i++)
+                              if (i == _currentPage)
                                 SlideDots(true)
                               else
                                 SlideDots(false)
@@ -82,40 +84,48 @@ class _InstructionsState extends State<Instructions> {
                     ],
                   )
                 ],
-              )
-            ),
-            SizedBox(height: 20,),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-              TextButton(
-                onPressed: (){},
-                child: const Text('Estoy lista!'),
-                style: TextButton.styleFrom(
-                  textStyle: const TextStyle(fontSize: 18),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                padding: const EdgeInsets.all(15),
-                backgroundColor: Colors.deepPurple,
-                  primary: Colors.white,
-                ),
+              )),
+              SizedBox(
+                height: 20,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                Text('¿Aun no tienes una cuenta?', style: TextStyle(fontSize: 18),),
-                TextButton(onPressed: (){},
-                  child: Text('Registrate!'),
-                  style: TextButton.styleFrom(
-                    textStyle: const TextStyle(fontSize: 18),
-                  ),),
-              ],),
-            ],)
-          ],
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text('Estoy lista!'),
+                    style: TextButton.styleFrom(
+                      textStyle: const TextStyle(fontSize: 18),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      padding: const EdgeInsets.all(15),
+                      backgroundColor: Colors.deepPurple,
+                      primary: Colors.white,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        '¿Aun no tienes una cuenta?',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      TextButton(
+                        onPressed: () {},
+                        child: Text('Registrate!'),
+                        style: TextButton.styleFrom(
+                          textStyle: const TextStyle(fontSize: 18),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
-    ),
     );
   }
 }

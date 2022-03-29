@@ -42,7 +42,9 @@ class Palette {
   static const Color _kYellow = Color(0xFFFFDC98);
   static const Color _kGreen = Color(0xFF28AD83);
 
-  static MaterialColor pink = generateMaterialColor(_kPink);
+  static const Color _pinkAccent = Color(0xFFF8A3FA);
+
+  static MaterialColor pink = generateMaterialColor(_pinkAccent);
   static MaterialColor orange = generateMaterialColor(_kOrange);
   static MaterialColor yellow = generateMaterialColor(_kYellow);
   static MaterialColor green = generateMaterialColor(_kGreen);
