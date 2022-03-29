@@ -136,29 +136,31 @@ class SignUpForm extends StatelessWidget {
                             },
                           ),
                           RichText(
-                            text: const TextSpan(
+                            text: TextSpan(
                               children: [
-                                TextSpan(text: 'Acepto los '),
+                                const TextSpan(text: 'Acepto los '),
                                 TextSpan(
                                   text: 'términos',
                                   style: TextStyle(
                                     fontWeight: FontWeight.w500,
                                     decoration: TextDecoration.underline,
-                                    color: Colors.black,
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
                                   ),
                                 ),
-                                TextSpan(text: ' y '),
+                                const TextSpan(text: ' y '),
                                 TextSpan(
                                   text: 'condiciones',
                                   style: TextStyle(
                                     fontWeight: FontWeight.w500,
                                     decoration: TextDecoration.underline,
-                                    color: Colors.black,
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
                                   ),
                                 ),
-                                TextSpan(text: ' de uso.'),
+                                const TextSpan(text: ' de uso.'),
                               ],
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontFamily: 'Sora',
                                 fontSize: 12,
@@ -185,173 +187,48 @@ class SignUpForm extends StatelessWidget {
                 : FilledPrimaryButton(
                     text: 'Registrarse',
                     onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        try {
-                          final result = await authProvider
-                              .signUp(formProvider.userCreate);
+                      FocusManager.instance.primaryFocus?.unfocus();
 
-                          Provider.of<UserLocalDataProvider>(
+                      if (!_formKey.currentState!.validate()) return;
+                      try {
+                        final result =
+                            await authProvider.signUp(formProvider.userCreate);
+
+                        Provider.of<UserLocalDataProvider>(
+                          context,
+                          listen: false,
+                        ).createUser(result);
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          makeSnackBar(
+                            type: AlertType.success,
+                            message: 'Registro de usuario exitoso',
+                          ),
+                        );
+
+                        Future.delayed(const Duration(seconds: 2), () {
+                          Navigator.pushAndRemoveUntil(
                             context,
-                            listen: false,
-                          ).createUser(result);
-
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            makeSnackBar(
-                              type: AlertType.success,
-                              message: 'Registro de usuario exitoso',
+                            TransitionPageRoute(
+                              child: const HomePage(),
+                              direction: AxisDirection.up,
                             ),
+                            ModalRoute.withName(''),
                           );
-
-                          Future.delayed(const Duration(seconds: 2), () {
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              TransitionPageRoute(
-                                child: const HomePage(),
-                                direction: AxisDirection.up,
-                              ),
-                              ModalRoute.withName(''),
-                            );
-                          });
-                        } on GeneralException catch (err) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            makeSnackBar(
-                              type: AlertType.error,
-                              message: err.message,
-                            ),
-                          );
-                        }
-                      } else {}
+                        });
+                      } on GeneralException catch (err) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          makeSnackBar(
+                            type: AlertType.error,
+                            message: err.message,
+                          ),
+                        );
+                      }
                     },
                   )
           ],
         ),
       );
     });
-    /*return Form(
-      key: _formKey,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      child: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 12.0),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Nombres',
-                labelStyle: TextStyle(fontWeight: FontWeight.w500),
-              ),
-              autocorrect: false,
-              keyboardType: TextInputType.name,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 12.0),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Apellidos',
-                labelStyle: TextStyle(fontWeight: FontWeight.w500),
-              ),
-              autocorrect: false,
-              keyboardType: TextInputType.name,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 12.0),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Correo',
-                labelStyle: TextStyle(fontWeight: FontWeight.w500),
-              ),
-              autocorrect: false,
-              keyboardType: TextInputType.emailAddress,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 12.0),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Contraseña',
-                labelStyle: TextStyle(fontWeight: FontWeight.w500),
-              ),
-              autocorrect: false,
-              obscureText: true,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 12.0),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Teléfono',
-                labelStyle: TextStyle(fontWeight: FontWeight.w500),
-              ),
-              autocorrect: false,
-              keyboardType: TextInputType.phone,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 12.0),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Estatura',
-                labelStyle: TextStyle(fontWeight: FontWeight.w500),
-              ),
-              autocorrect: false,
-              keyboardType: TextInputType.number,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 12.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Checkbox(
-                  value: false,
-                  onChanged: (bool? val) {},
-                ),
-                RichText(
-                  text: const TextSpan(
-                    children: [
-                      TextSpan(text: 'Acepto los '),
-                      TextSpan(
-                        text: 'términos',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          decoration: TextDecoration.underline,
-                          color: Colors.black,
-                        ),
-                      ),
-                      TextSpan(text: ' y '),
-                      TextSpan(
-                        text: 'condiciones',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          decoration: TextDecoration.underline,
-                          color: Colors.black,
-                        ),
-                      ),
-                      TextSpan(text: ' de uso.'),
-                    ],
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'Sora',
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          FilledPrimaryButton(
-            text: 'Registrarse',
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                print('jajaj');
-              } else {
-                print('jejeje');
-              }
-            },
-          )
-        ],
-      ),
-    );*/
   }
 }
