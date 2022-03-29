@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:patronaje_mobile_app/presentation/shared/filled_primary_button.dart';
 import 'package:patronaje_mobile_app/presentation/shared/outlined_secondary_button.dart';
 import 'package:patronaje_mobile_app/presentation/shared/transition_page_route.dart';
+import 'package:patronaje_mobile_app/presentation/sign_in/sign_in_page.dart';
 import 'package:patronaje_mobile_app/presentation/sign_up/sign_up_page.dart';
-import 'package:patronaje_mobile_app/presentation/user_instructions/instructions_screen.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -61,12 +61,13 @@ class WelcomePage extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).push(
                         TransitionPageRoute(
-                          child: Instructions(),
+                          child: const SignInPage(),
                           direction: AxisDirection.left,
                         ),
                       );
                     },
                   ),
+                  const SizedBox(height: 12),
                   OutlinedSecondaryButton(
                     text: 'Regístrate',
                     minimunSize: const Size.fromHeight(36),

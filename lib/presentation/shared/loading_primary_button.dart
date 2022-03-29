@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:patronaje_mobile_app/domain/utils/themes/color_theme.dart';
 
 class LoadingPrimaryButton extends StatelessWidget {
   final Size minimunSize;
@@ -17,15 +16,15 @@ class LoadingPrimaryButton extends StatelessWidget {
       style: OutlinedButton.styleFrom(
         minimumSize: minimunSize,
         side: BorderSide(
-          width: 0.7,
-          color: color ?? Palette.pink,
+          width: 0.8,
+          color: color ?? Theme.of(context).colorScheme.primary,
         ),
       ),
       child: SizedBox(
         height: 26,
         width: 26,
         child: CircularProgressIndicator(
-          color: color ?? Palette.pink,
+          color: color ?? Theme.of(context).colorScheme.primary,
         ),
       ),
     );

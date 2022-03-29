@@ -56,9 +56,9 @@ class SignUpFormProvider extends ChangeNotifier {
   String? validatePassword(String? value) {
     if (value == null || value.isEmpty) return 'La contraseña es requerida.';
 
-    const emailRegex = r"""^(?=.*?[a-z])(?=.*?[0-9]).{8,20}$""";
+    const passwordRegex = r"""^(?=.*?[a-z])(?=.*?[0-9]).{8,20}$""";
 
-    if (!RegExp(emailRegex).hasMatch(value)) {
+    if (!RegExp(passwordRegex).hasMatch(value)) {
       return 'Mínimo 8 caracteres y contener al menos \nuna letra y un número.';
     } else {
       return null;

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:patronaje_mobile_app/domain/utils/themes/color_theme.dart';
 
 class OutlinedSecondaryButton extends StatelessWidget {
   final String text;
@@ -20,15 +19,15 @@ class OutlinedSecondaryButton extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-          color: Palette.green,
+          color: Theme.of(context).colorScheme.secondary,
         ),
       ),
       style: OutlinedButton.styleFrom(
-        primary: Palette.green,
+        primary: Theme.of(context).colorScheme.secondary,
         minimumSize: minimunSize,
         side: BorderSide(
-          width: 0.7,
-          color: Palette.green.shade500,
+          width: 0.8,
+          color: Theme.of(context).colorScheme.secondary,
         ),
       ),
     );
