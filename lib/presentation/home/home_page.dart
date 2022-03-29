@@ -12,7 +12,17 @@ class HomePage extends StatelessWidget {
         color: Colors.white,
         child: Consumer<UserLocalDataProvider>(
           builder: (context, userProvider, child) {
-            return Text(userProvider.userData.token);
+            return Column(
+              children: [
+                Text(userProvider.userData.token),
+                const SizedBox(height: 36.0),
+                Text(userProvider.userData.email),
+                Text(userProvider.userData.names),
+                Text(userProvider.userData.firstUseApp.toString()),
+                Text(userProvider.userData.firstTakeMeasure.toString()),
+                Text(userProvider.userData.expiredSession.toString()),
+              ],
+            );
           },
         ),
       ),
