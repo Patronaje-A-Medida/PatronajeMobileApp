@@ -12,15 +12,7 @@ class SignUpPage extends StatelessWidget {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'Registrarse',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black,
+          title: const Text('Registrarse'),
           leading: IconButton(
             icon: const Icon(
               Icons.arrow_back_ios,

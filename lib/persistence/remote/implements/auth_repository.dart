@@ -27,11 +27,11 @@ class AuthRepository extends BaseAuthRepository {
 
       final userClientToken = UserClientToken.fromMap(response.data);
       return userClientToken;
+    } on SocketException catch (err) {
+      throw GeneralException(message: err.message, errorCode: 500);
     } on DioError catch (err) {
       final errorResponse = ErrorDetail.fromMap(err.response?.data);
       throw GeneralException.fromErrorResponse(errorResponse);
-    } on SocketException catch (err) {
-      throw GeneralException(message: err.message, errorCode: 500);
     } on Exception catch (_) {
       rethrow;
     }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:patronaje_mobile_app/presentation/shared/filled_primary_button.dart';
-import 'package:patronaje_mobile_app/presentation/shared/outlined_secondary_button.dart';
+import 'package:patronaje_mobile_app/presentation/shared/app_filled_button.dart';
+import 'package:patronaje_mobile_app/presentation/shared/app_outlined_button.dart';
 import 'package:patronaje_mobile_app/presentation/shared/transition_page_route.dart';
 import 'package:patronaje_mobile_app/presentation/sign_in/sign_in_page.dart';
 import 'package:patronaje_mobile_app/presentation/sign_up/sign_up_page.dart';
@@ -55,7 +55,7 @@ class WelcomePage extends StatelessWidget {
               ),
               Column(
                 children: [
-                  FilledPrimaryButton(
+                  AppFilledButton(
                     text: 'Iniciar sesión',
                     minimunSize: const Size.fromHeight(36),
                     onPressed: () {
@@ -68,9 +68,10 @@ class WelcomePage extends StatelessWidget {
                     },
                   ),
                   const SizedBox(height: 12),
-                  OutlinedSecondaryButton(
+                  AppOutlinedButton(
                     text: 'Regístrate',
                     minimunSize: const Size.fromHeight(36),
+                    color: Theme.of(context).colorScheme.secondary,
                     onPressed: () {
                       /*Navigator.push(
                         context,
