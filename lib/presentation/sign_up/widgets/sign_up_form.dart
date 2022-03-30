@@ -5,8 +5,9 @@ import 'package:patronaje_mobile_app/business/shared/user_local_data_provider.da
 import 'package:patronaje_mobile_app/domain/handlers/exceptions/general_exception.dart';
 import 'package:patronaje_mobile_app/domain/utils/enums/general_enums.dart';
 import 'package:patronaje_mobile_app/presentation/home/home_page.dart';
+import 'package:patronaje_mobile_app/presentation/main/main_page.dart';
 import 'package:patronaje_mobile_app/presentation/shared/custom_snackbar.dart';
-import 'package:patronaje_mobile_app/presentation/shared/filled_primary_button.dart';
+import 'package:patronaje_mobile_app/presentation/shared/app_filled_button.dart';
 import 'package:patronaje_mobile_app/presentation/shared/loading_primary_button.dart';
 import 'package:patronaje_mobile_app/presentation/shared/transition_page_route.dart';
 import 'package:provider/provider.dart';
@@ -184,7 +185,7 @@ class SignUpForm extends StatelessWidget {
             ),
             authProvider.isLoading
                 ? const LoadingPrimaryButton()
-                : FilledPrimaryButton(
+                : AppFilledButton(
                     text: 'Registrarse',
                     onPressed: () async {
                       FocusManager.instance.primaryFocus?.unfocus();
@@ -210,7 +211,7 @@ class SignUpForm extends StatelessWidget {
                           Navigator.pushAndRemoveUntil(
                             context,
                             TransitionPageRoute(
-                              child: const HomePage(),
+                              child: const MainPage(),
                               direction: AxisDirection.up,
                             ),
                             ModalRoute.withName(''),

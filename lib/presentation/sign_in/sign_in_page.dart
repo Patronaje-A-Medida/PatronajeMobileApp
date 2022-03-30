@@ -10,15 +10,7 @@ class SignInPage extends StatelessWidget {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'Iniciar sesión',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black,
+          title: const Text('Iniciar sesión'),
           leading: IconButton(
             icon: const Icon(
               Icons.arrow_back_ios,

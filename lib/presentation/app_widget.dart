@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:patronaje_mobile_app/business/auth/auth_provider.dart';
+import 'package:patronaje_mobile_app/business/garments/garment_provider.dart';
+import 'package:patronaje_mobile_app/business/shared/configuration_types_provider.dart';
+import 'package:patronaje_mobile_app/business/shared/navigation_provider.dart';
 import 'package:patronaje_mobile_app/business/shared/sign_in_form_provider.dart';
 import 'package:patronaje_mobile_app/business/shared/sign_up_form_provider.dart';
 import 'package:patronaje_mobile_app/business/shared/user_local_data_provider.dart';
 import 'package:patronaje_mobile_app/domain/utils/themes/color_theme.dart';
 import 'package:patronaje_mobile_app/persistence/local/implements/user_local_data_repository.dart';
 import 'package:patronaje_mobile_app/persistence/remote/implements/auth_repository.dart';
+import 'package:patronaje_mobile_app/persistence/remote/implements/configuration_types_repository.dart';
+import 'package:patronaje_mobile_app/persistence/remote/implements/garment_repository.dart';
 import 'package:patronaje_mobile_app/presentation/welcome/welcome_page.dart';
 import 'package:provider/provider.dart';
 
@@ -20,8 +25,18 @@ class AppWidget extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AuthProvider(AuthRepository())),
         ChangeNotifierProvider(create: (_) => SignUpFormProvider()),
         ChangeNotifierProvider(
-            create: (_) => UserLocalDataProvider(UserLocalDataRepository())),
+          create: (_) => UserLocalDataProvider(UserLocalDataRepository()),
+        ),
         Provider(create: (_) => SignInFormProvider()),
+        ChangeNotifierProvider(create: (_) => NavigationProvider()),
+        ChangeNotifierProvider(
+          create: (_) => GarmentProvider(GarmentRepository())..getAllByQuery(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) =>
+              ConfigurationTypesProvider(ConfigurationTypesRepository())
+                ..getAllTypes(),
+        ),
       ],
       child: MaterialApp(
         title: 'PRY2021251',
@@ -74,7 +89,17 @@ class AppWidget extends StatelessWidget {
               ),
             ),
           ),
-          //elevatedButtonTheme:
+          appBarTheme: const AppBarTheme(
+            elevation: 0,
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.black,
+            titleTextStyle: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
+              fontFamily: 'Sora',
+            ),
+          ),
         ),
         home: const WelcomePage(),
       ),

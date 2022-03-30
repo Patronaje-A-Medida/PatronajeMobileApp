@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
-class FilledPrimaryButton extends StatelessWidget {
+class AppFilledButton extends StatelessWidget {
   final String text;
   final Size minimunSize;
   final VoidCallback? onPressed;
+  final Color? color;
 
-  const FilledPrimaryButton({
+  const AppFilledButton({
     Key? key,
     required this.text,
-    this.minimunSize = const Size(64, 36),
     required this.onPressed,
+    this.minimunSize = const Size(64, 36),
+    this.color,
   }) : super(key: key);
 
   @override
@@ -17,6 +19,7 @@ class FilledPrimaryButton extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         minimumSize: minimunSize,
+        primary: color ?? Theme.of(context).colorScheme.primary,
       ),
       child: Text(
         text,

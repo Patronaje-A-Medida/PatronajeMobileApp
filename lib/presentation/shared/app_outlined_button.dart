@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
-class OutlinedSecondaryButton extends StatelessWidget {
+class AppOutlinedButton extends StatelessWidget {
   final String text;
   final Size minimunSize;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
+  final Color? color;
 
-  const OutlinedSecondaryButton({
+  const AppOutlinedButton({
     Key? key,
     required this.text,
-    this.minimunSize = const Size(64, 36),
     required this.onPressed,
+    this.minimunSize = const Size(64, 36),
+    this.color,
   }) : super(key: key);
 
   @override
@@ -19,15 +21,15 @@ class OutlinedSecondaryButton extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-          color: Theme.of(context).colorScheme.secondary,
+          color: color ?? Theme.of(context).colorScheme.primary,
         ),
       ),
       style: OutlinedButton.styleFrom(
-        primary: Theme.of(context).colorScheme.secondary,
+        primary: color ?? Theme.of(context).colorScheme.primary,
         minimumSize: minimunSize,
         side: BorderSide(
           width: 0.8,
-          color: Theme.of(context).colorScheme.secondary,
+          color: color ?? Theme.of(context).colorScheme.primary,
         ),
       ),
     );
