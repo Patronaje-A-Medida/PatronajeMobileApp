@@ -23,7 +23,6 @@ class GarmentProvider extends ChangeNotifier {
     try {
       _isLoading = true;
       notifyListeners();
-      print(_garmentQuery);
       final result = await _garmentRepository.getAllByQuery(_garmentQuery);
       _isLoading = false;
       _garments = result;
