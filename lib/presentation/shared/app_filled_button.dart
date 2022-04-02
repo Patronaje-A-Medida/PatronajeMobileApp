@@ -5,6 +5,7 @@ class AppFilledButton extends StatelessWidget {
   final Size minimunSize;
   final VoidCallback? onPressed;
   final Color? color;
+  final IconData? icon;
 
   const AppFilledButton({
     Key? key,
@@ -12,6 +13,7 @@ class AppFilledButton extends StatelessWidget {
     required this.onPressed,
     this.minimunSize = const Size(64, 36),
     this.color,
+    this.icon,
   }) : super(key: key);
 
   @override
@@ -21,12 +23,18 @@ class AppFilledButton extends StatelessWidget {
         minimumSize: minimunSize,
         primary: color ?? Theme.of(context).colorScheme.primary,
       ),
-      child: Text(
-        text,
-        style: const TextStyle(
-          fontWeight: FontWeight.normal,
-          color: Colors.black,
-        ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            text,
+            style: const TextStyle(
+              fontWeight: FontWeight.normal,
+              color: Colors.black,
+            ),
+          ),
+          if (icon != null) Icon(icon),
+        ],
       ),
       onPressed: onPressed,
     );

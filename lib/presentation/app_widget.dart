@@ -53,6 +53,7 @@ class AppWidget extends StatelessWidget {
           // is not restarted.
           fontFamily: 'Sora',
           primarySwatch: Palette.pink,
+
           colorScheme: ColorScheme(
             brightness: Brightness.light,
             primary: Palette.pink.shade200,

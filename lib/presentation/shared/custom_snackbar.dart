@@ -18,7 +18,7 @@ SnackBar makeSnackBar({required AlertType type, required String message}) {
 Icon getIconByType(AlertType type) {
   switch (type) {
     case AlertType.success:
-      return Icon(
+      return const Icon(
         Icons.check,
         color: Palette.green,
       );

@@ -4,7 +4,6 @@ import 'package:patronaje_mobile_app/business/shared/sign_up_form_provider.dart'
 import 'package:patronaje_mobile_app/business/shared/user_local_data_provider.dart';
 import 'package:patronaje_mobile_app/domain/handlers/exceptions/general_exception.dart';
 import 'package:patronaje_mobile_app/domain/utils/enums/general_enums.dart';
-import 'package:patronaje_mobile_app/presentation/home/home_page.dart';
 import 'package:patronaje_mobile_app/presentation/main/main_page.dart';
 import 'package:patronaje_mobile_app/presentation/shared/custom_snackbar.dart';
 import 'package:patronaje_mobile_app/presentation/shared/app_filled_button.dart';
