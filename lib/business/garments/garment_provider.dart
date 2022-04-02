@@ -1,9 +1,11 @@
+// ignore_for_file: avoid_init_to_null
+
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:patronaje_mobile_app/domain/handlers/exceptions/general_exception.dart';
-import 'package:patronaje_mobile_app/domain/models/garments/garment_min.dart';
 import 'package:patronaje_mobile_app/domain/models/garments/garment_query.dart';
+import 'package:patronaje_mobile_app/domain/models/garments/garment_read.dart';
 import 'package:patronaje_mobile_app/persistence/remote/implements/garment_repository.dart';
 
 class GarmentProvider extends ChangeNotifier {
@@ -12,12 +14,14 @@ class GarmentProvider extends ChangeNotifier {
   GarmentProvider(this._garmentRepository);
 
   late bool _isLoading = false;
-  late List<GarmentMin> _garments = [];
+  late List<GarmentRead> _garments = [];
   Timer? _debounce;
   late GarmentQuery _garmentQuery = GarmentQuery();
+  late GarmentRead? _garmentDetails = null;
 
   bool get isLoading => _isLoading;
-  List<GarmentMin> get garments => _garments;
+  List<GarmentRead> get garments => _garments;
+  GarmentRead? get garmentDetails => _garmentDetails;
 
   Future<void> getAllByQuery() async {
     try {
@@ -53,5 +57,21 @@ class GarmentProvider extends ChangeNotifier {
   void resetAndGetAll() async {
     _garmentQuery = GarmentQuery();
     await getAllByQuery();
+  }
+
+  void getDetails(int id) async {
+    try {
+      //_isLoading = true;
+      _garmentDetails = null;
+      notifyListeners();
+      final result = await _garmentRepository.getById(id);
+      //_isLoading = false;
+      _garmentDetails = result;
+      notifyListeners();
+    } on GeneralException catch (_) {
+      //_isLoading = false;
+      //notifyListeners();
+      rethrow;
+    }
   }
 }
