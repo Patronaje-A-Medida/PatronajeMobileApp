@@ -45,7 +45,7 @@ class SearchAndFilterBar extends StatelessWidget {
                   builder: (context) {
                     return StatefulBuilder(builder: (context, setModalState) {
                       return Padding(
-                        padding: const EdgeInsets.all(12.0),
+                        padding: const EdgeInsets.all(18),
                         child: Column(
                           //mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
