@@ -25,9 +25,20 @@ class NavigationProvider extends ChangeNotifier {
   int get currentPage => _currentPage;
 
   set currentPage(int value) {
+    final difference = (_currentPage - value).abs();
+
     _currentPage = value;
     _currentTitlePage = _titles[value];
-    _pageController.jumpToPage(value);
+
+    if (difference > 1) {
+      _pageController.jumpToPage(value);
+    } else {
+      _pageController.animateToPage(
+        value,
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.easeOut,
+      );
+    }
     notifyListeners();
   }
 
@@ -42,8 +53,17 @@ class NavigationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /*int _currentPage = 0;
-  String _currentTitlePage = 'Home';
-  PageController _pageController = PageController(initialPage: 0);*/
+  setWithoutMove(int value) {
+    _currentPage = value;
+    _currentTitlePage = _titles[value];
+    _pageController.dispose();
+    _pageController = PageController(initialPage: value);
+    notifyListeners();
+  }
 
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 }
