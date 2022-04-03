@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:patronaje_mobile_app/business/auth/auth_provider.dart';
 import 'package:patronaje_mobile_app/business/garments/garment_provider.dart';
+import 'package:patronaje_mobile_app/business/on_boarding_measures/measures_guide_provider.dart';
 import 'package:patronaje_mobile_app/business/shared/configuration_types_provider.dart';
 import 'package:patronaje_mobile_app/business/shared/navigation_provider.dart';
 import 'package:patronaje_mobile_app/business/shared/sign_in_form_provider.dart';
@@ -37,6 +38,7 @@ class AppWidget extends StatelessWidget {
               ConfigurationTypesProvider(ConfigurationTypesRepository())
                 ..getAllTypes(),
         ),
+        ChangeNotifierProvider(create: (_) => MeasuresGuideProvider()),
       ],
       child: MaterialApp(
         title: 'PRY2021251',
