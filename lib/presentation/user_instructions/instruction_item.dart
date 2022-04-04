@@ -27,7 +27,6 @@ class SlideItem extends StatelessWidget{
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 22,
-            color: Colors.white,
           ),
         ),
         SizedBox(height: 10,),
@@ -35,7 +34,6 @@ class SlideItem extends StatelessWidget{
           slideList[index].description,
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: Colors.white,
           ),
         ),
       ],

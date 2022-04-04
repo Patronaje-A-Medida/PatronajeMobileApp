@@ -46,8 +46,8 @@ class _InstructionsState extends State<Instructions> {
   @override
   Widget build(BuildContext context){
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
-        color: Colors.pinkAccent,
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: Column(

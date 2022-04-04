@@ -7,6 +7,7 @@ import 'package:patronaje_mobile_app/persistence/local/implements/user_local_dat
 import 'package:patronaje_mobile_app/persistence/remote/implements/auth_repository.dart';
 import 'package:patronaje_mobile_app/presentation/welcome/welcome_page.dart';
 import 'package:provider/provider.dart';
+import 'package:patronaje_mobile_app/presentation/view_measurement_results/measures_screen.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({Key? key}) : super(key: key);
