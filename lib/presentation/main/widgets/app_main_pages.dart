@@ -33,6 +33,7 @@ class AppMainPages extends StatelessWidget {
           navigationProvider.moveTo(value);
         }
       },*/
+      physics: const NeverScrollableScrollPhysics(),
       children: [
         const HomePage(),
         Container(
