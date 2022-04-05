@@ -1,4 +1,4 @@
-import 'package:camera/camera.dart';
+/*import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:patronaje_mobile_app/presentation/user_take_photos/user_take_photos.dart';
 
@@ -81,3 +81,4 @@ class _CameraPageState extends State<CameraPage> {
     );
   }
 }
+*/
