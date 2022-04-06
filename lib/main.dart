@@ -23,6 +23,8 @@ void main() async {
         expiredSession: DateTime.now().add(const Duration(hours: 5)),
         firstUseApp: true,
         firstTakeMeasure: true,
+        userId: '',
+        lastNames: '',
       ),
     );
   }
