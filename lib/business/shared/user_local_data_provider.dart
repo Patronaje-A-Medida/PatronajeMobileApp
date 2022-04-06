@@ -32,14 +32,17 @@ class UserLocalDataProvider extends ChangeNotifier {
     final UserLocalData userLocalData = UserLocalData(
       id: userClientToken.userInfo.id,
       email: userClientToken.userInfo.email,
-      names:
-          '${userClientToken.userInfo.nameUser} ${userClientToken.userInfo.lastNameUser}',
+      names: userClientToken.userInfo.nameUser,
       height: userClientToken.userInfo.height,
       phone: userClientToken.userInfo.phone,
       token: userClientToken.userToken.token,
       expiredSession: userClientToken.userToken.expiration,
       firstUseApp: true,
       firstTakeMeasure: true,
+      lastNames: userClientToken.userInfo.lastNameUser,
+      userId: userClientToken.userInfo.userId,
+      imageProfile: userClientToken.userInfo.imageProfile ??
+          'https://firebasestorage.googleapis.com/v0/b/pry2021251-pam.appspot.com/o/profiles%2Fclient-default.png?alt=media&token=e859abd2-fb48-477b-9ca0-d446f5acedf5',
     );
 
     await _userLocalDataRepository.saveUserLocalData(userLocalData);
@@ -50,10 +53,14 @@ class UserLocalDataProvider extends ChangeNotifier {
     currentUser.id = userClientToken.userInfo.id;
     currentUser.email = userClientToken.userInfo.email;
     currentUser.names = userClientToken.userInfo.nameUser;
+    currentUser.lastNames = userClientToken.userInfo.lastNameUser;
+    currentUser.userId = userClientToken.userInfo.userId;
     currentUser.height = userClientToken.userInfo.height;
     currentUser.phone = userClientToken.userInfo.phone;
     currentUser.token = userClientToken.userToken.token;
     currentUser.expiredSession = userClientToken.userToken.expiration;
+    currentUser.imageProfile = userClientToken.userInfo.imageProfile ??
+        'https://firebasestorage.googleapis.com/v0/b/pry2021251-pam.appspot.com/o/profiles%2Fclient-default.png?alt=media&token=e859abd2-fb48-477b-9ca0-d446f5acedf5';
 
     await _userLocalDataRepository.saveUserLocalData(currentUser);
   }
