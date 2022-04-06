@@ -15,6 +15,7 @@ class SearchAndFilterBar extends StatelessWidget {
     return Consumer2<GarmentProvider, ConfigurationTypesProvider>(
       builder: (context, garmentProvider, typesProvider, child) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.max,
         children: [
           Expanded(
             child: TextField(
@@ -31,11 +32,10 @@ class SearchAndFilterBar extends StatelessWidget {
                   garmentProvider.searchGarmentsByQuery(value),
             ),
           ),
-          const SizedBox(width: 18.0),
-          InkWell(
-            borderRadius: BorderRadius.circular(20),
-            child: const Icon(Icons.filter_list_rounded),
-            onTap: () {
+          const SizedBox(width: 8.0),
+          IconButton(
+            icon: const Icon(Icons.filter_list_rounded),
+            onPressed: () {
               showModalBottomSheet(
                   context: context,
                   shape: const RoundedRectangleBorder(
