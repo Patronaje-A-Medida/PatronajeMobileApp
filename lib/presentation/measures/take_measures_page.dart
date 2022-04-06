@@ -190,7 +190,7 @@ class TakeMeasuresPage extends StatelessWidget {
                   onPressed: () {
                     if (takeMeasuresProvider.canCalculateMeasures) {
                       takeMeasuresProvider.calculateMeasures();
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         TransitionPageRoute(
                           child: const MeasuresResultsPage(),
