@@ -26,13 +26,15 @@ class UserLocalDataAdapter extends TypeAdapter<UserLocalData> {
       expiredSession: fields[6] as DateTime,
       firstUseApp: fields[7] as bool,
       firstTakeMeasure: fields[8] as bool,
+      lastNames: fields[9] as String,
+      userId: fields[10] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, UserLocalData obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -50,7 +52,11 @@ class UserLocalDataAdapter extends TypeAdapter<UserLocalData> {
       ..writeByte(7)
       ..write(obj.firstUseApp)
       ..writeByte(8)
-      ..write(obj.firstTakeMeasure);
+      ..write(obj.firstTakeMeasure)
+      ..writeByte(9)
+      ..write(obj.lastNames)
+      ..writeByte(10)
+      ..write(obj.userId);
   }
 
   @override

@@ -31,6 +31,15 @@ class UserLocalData {
   @HiveField(8)
   bool firstTakeMeasure;
 
+  @HiveField(9)
+  String lastNames;
+
+  @HiveField(10)
+  String userId;
+
+  @HiveField(11)
+  String imageProfile;
+
   UserLocalData({
     required this.id,
     required this.email,
@@ -41,5 +50,9 @@ class UserLocalData {
     required this.expiredSession,
     required this.firstUseApp,
     required this.firstTakeMeasure,
+    required this.lastNames,
+    required this.userId,
+    this.imageProfile =
+        'https://firebasestorage.googleapis.com/v0/b/pry2021251-pam.appspot.com/o/profiles%2Fclient-default.png?alt=media&token=e859abd2-fb48-477b-9ca0-d446f5acedf5',
   });
 }

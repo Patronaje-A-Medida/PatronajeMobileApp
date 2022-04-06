@@ -9,6 +9,8 @@ class UserRead {
   double height;
   String phone;
   String role;
+  String? imageProfile;
+
   UserRead({
     required this.id,
     required this.userId,
@@ -18,6 +20,7 @@ class UserRead {
     required this.height,
     required this.phone,
     required this.role,
+    this.imageProfile,
   });
 
   UserRead copyWith({
@@ -29,6 +32,7 @@ class UserRead {
     double? height,
     String? phone,
     String? role,
+    String? imageProfile,
   }) {
     return UserRead(
       id: id ?? this.id,
@@ -39,6 +43,7 @@ class UserRead {
       height: height ?? this.height,
       phone: phone ?? this.phone,
       role: role ?? this.role,
+      imageProfile: imageProfile ?? this.imageProfile,
     );
   }
 
@@ -52,6 +57,7 @@ class UserRead {
       'height': height,
       'phone': phone,
       'role': role,
+      'imageProfile': imageProfile,
     };
   }
 
@@ -65,6 +71,7 @@ class UserRead {
       height: map['height'],
       phone: map['phone'],
       role: map['role'],
+      imageProfile: map['imageProfile'],
     );
   }
 
@@ -75,7 +82,7 @@ class UserRead {
 
   @override
   String toString() {
-    return 'UserRead(id: $id, userId: $userId, email: $email, nameUser: $nameUser, lastNameUser: $lastNameUser, height: $height, phone: $phone, role: $role)';
+    return 'UserRead(id: $id, userId: $userId, email: $email, nameUser: $nameUser, lastNameUser: $lastNameUser, height: $height, phone: $phone, role: $role, imageProfile: $imageProfile)';
   }
 
   @override
@@ -90,7 +97,8 @@ class UserRead {
         other.lastNameUser == lastNameUser &&
         other.height == height &&
         other.phone == phone &&
-        other.role == role;
+        other.role == role &&
+        other.imageProfile == imageProfile;
   }
 
   @override
@@ -102,6 +110,7 @@ class UserRead {
         lastNameUser.hashCode ^
         height.hashCode ^
         phone.hashCode ^
-        role.hashCode;
+        role.hashCode ^
+        imageProfile.hashCode;
   }
 }
