@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:patronaje_mobile_app/business/measures/take_measures_provider.dart';
 import 'package:patronaje_mobile_app/domain/utils/enums/general_enums.dart';
 import 'package:patronaje_mobile_app/domain/utils/themes/color_theme.dart';
-import 'package:patronaje_mobile_app/presentation/measures/measure_results_page.dart';
+import 'package:patronaje_mobile_app/presentation/measures/measures_results_page.dart';
 import 'package:patronaje_mobile_app/presentation/shared/app_filled_button.dart';
 import 'package:patronaje_mobile_app/presentation/shared/custom_snackbar.dart';
 import 'package:patronaje_mobile_app/presentation/shared/transition_page_route.dart';
@@ -24,8 +24,7 @@ class TakeMeasuresPage extends StatelessWidget {
             size: 18,
           ),
           onPressed: () {
-            takeMeasuresProvider.imageFrontal = null;
-            takeMeasuresProvider.imageLateral = null;
+            takeMeasuresProvider.resetPhotos();
             Navigator.pop(context);
           },
         ),
@@ -190,10 +189,11 @@ class TakeMeasuresPage extends StatelessWidget {
                   //icon: Icons.camera_alt_rounded,
                   onPressed: () {
                     if (takeMeasuresProvider.canCalculateMeasures) {
-                      Navigator.push(
+                      takeMeasuresProvider.calculateMeasures();
+                      Navigator.pushReplacement(
                         context,
                         TransitionPageRoute(
-                          child: const MeasureResultsPage(),
+                          child: const MeasuresResultsPage(),
                           direction: AxisDirection.left,
                         ),
                       );
