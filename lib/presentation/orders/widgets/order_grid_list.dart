@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:patronaje_mobile_app/business/orders/order_provider.dart';
+import 'package:patronaje_mobile_app/presentation/orders/widgets/button_status.dart';
+import 'package:patronaje_mobile_app/presentation/orders/widgets/order_details_page.dart';
 import 'package:provider/provider.dart';
 
 class OrderGridList extends StatelessWidget {
@@ -15,18 +17,16 @@ class OrderGridList extends StatelessWidget {
           final order = orderProvider.orders[index];
           return GestureDetector(
             onTap: () {
-              /*
               Navigator.of(context).push(
                 PageRouteBuilder(pageBuilder: (context, animation, _) {
                   return FadeTransition(
                     opacity: animation,
                     child: OrderDetailsPage(
-                      //TODO
-                      order: order,
+                      orderDetails: order.details,
                     ),
                   );
                 }),
-              );*/
+              );
             },
             child: Card(
               elevation: 8,
@@ -56,21 +56,27 @@ class OrderGridList extends StatelessWidget {
                 Expanded(
                     flex: 4,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(order.orderDate.toString(),
+                        const SizedBox(height: 8),
+                        Text(order.orderDate.toString().split('.')[0],
                             style: Theme.of(context).textTheme.caption),
+                        const SizedBox(height: 8),
                         Text(
                           order.nameAtelier,
                           style: const TextStyle(fontWeight: FontWeight.w600),
                         ),
-                        Text(order.nameAtelier,
+                        Text(order.atelierAddress,
                             style: Theme.of(context).textTheme.caption),
                         const SizedBox(height: 12),
-                        Text(order.price.toStringAsFixed(2),
+                        Text('S/${order.price.toStringAsFixed(2)}',
                             style: Theme.of(context).textTheme.caption),
-                        Text(order.orderStatus,
-                            style: Theme.of(context).textTheme.caption),
+                        Padding(
+                            padding: const EdgeInsets.only(bottom: 12.0),
+                            /*child: RowFeatures(
+                            features: [order.orderStatus, order.orderStatus],
+                          ),*/
+                            child: ButtonStatus(status: order.orderStatus)),
                       ],
                     ))
               ]),
