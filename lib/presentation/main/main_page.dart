@@ -12,8 +12,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final navigationProvider = Provider.of<NavigationProvider>(context);
-    final userLocalData =
-        Provider.of<UserLocalDataProvider>(context, listen: false).userData;
+    final userLocalData = Provider.of<UserLocalDataProvider>(context).userData;
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
