@@ -5,7 +5,6 @@ import 'package:patronaje_mobile_app/persistence/remote/implements/order_reposit
 
 class OrderProvider extends ChangeNotifier {
   final OrderRepository _orderRepository;
-
   OrderProvider(this._orderRepository);
 
   late bool _isLoading = false;

@@ -46,9 +46,9 @@ class AppWidget extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => TakeMeasuresProvider()),
         ChangeNotifierProvider(create: (_) => ProfileProvider()),
         ChangeNotifierProvider(
-            create: (_) => OrderProvider(
-                OrderRepository(UserLocalDataRepository())
-                  ..getOrdersByClientId()))
+            create: (_) =>
+                OrderProvider(OrderRepository(UserLocalDataRepository()))
+                  ..getOrdersByIdCliente()),
       ],
       child: MaterialApp(
         title: 'PRY2021251',

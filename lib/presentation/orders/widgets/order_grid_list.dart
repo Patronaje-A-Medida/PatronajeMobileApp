@@ -13,9 +13,6 @@ class OrderGridList extends StatelessWidget {
         itemCount: orderProvider.orders.length,
         itemBuilder: (context, index) {
           final order = orderProvider.orders[index];
-          print("=========================vista");
-          print(order.toString());
-
           return GestureDetector(
             onTap: () {
               /*
@@ -40,15 +37,18 @@ class OrderGridList extends StatelessWidget {
                   flex: 2,
                   child: Hero(
                     tag: 'order-${order.id}',
-                    child: CachedNetworkImage(
-                      //imageUrl: order.garments.images[0], //TODO
-                      imageUrl: order.details[0].imageUrl,
-                      imageBuilder: (context, imageProvider) => Container(
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.contain,
-                        )),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CachedNetworkImage(
+                        height: 100,
+                        imageUrl: order.details[0].imageUrl,
+                        imageBuilder: (context, imageProvider) => Container(
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                            image: imageProvider,
+                            fit: BoxFit.contain,
+                          )),
+                        ),
                       ),
                     ),
                   ),
@@ -56,6 +56,7 @@ class OrderGridList extends StatelessWidget {
                 Expanded(
                     flex: 4,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Text(order.orderDate.toString(),
                             style: Theme.of(context).textTheme.caption),
