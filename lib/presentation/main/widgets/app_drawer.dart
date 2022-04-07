@@ -52,7 +52,10 @@ class AppDrawer extends StatelessWidget {
               leading: const Icon(Icons.accessibility_new_rounded),
               iconColor: Colors.black,
               title: const Text('Historial de medidas'),
-              onTap: () {},
+              onTap: () {
+                // aqui ira la ruta hacia la pantalla de historial de medidas
+                // la pagian de historial de medidas debe estar en la carpeta presentation/measures
+              },
             ),
             ListTile(
               leading: const Icon(Icons.logout),
