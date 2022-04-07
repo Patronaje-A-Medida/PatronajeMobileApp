@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:patronaje_mobile_app/business/basket/basket_provider.dart';
 import 'package:patronaje_mobile_app/domain/models/garments/garment_read.dart';
+import 'package:patronaje_mobile_app/domain/utils/enums/general_enums.dart';
 import 'package:patronaje_mobile_app/domain/utils/themes/color_theme.dart';
 import 'package:patronaje_mobile_app/presentation/catalogue/widgets/row_colors.dart';
 import 'package:patronaje_mobile_app/presentation/catalogue/widgets/row_features.dart';
 import 'package:patronaje_mobile_app/presentation/shared/app_carousel.dart';
 import 'package:patronaje_mobile_app/presentation/shared/app_filled_button.dart';
+import 'package:patronaje_mobile_app/presentation/shared/custom_snackbar.dart';
+import 'package:provider/provider.dart';
 
 class GarmentDetailsPage extends StatefulWidget {
   final GarmentRead garment;
@@ -24,6 +28,7 @@ class _GarmentDetailsPageState extends State<GarmentDetailsPage>
   late AnimationController _animationController;
   late Animation<double> _heightFactorAnimation;
   bool _isAnimationCompleted = false;
+  String _selectedColor = '';
 
   @override
   void initState() {
@@ -74,6 +79,7 @@ class _GarmentDetailsPageState extends State<GarmentDetailsPage>
   Widget build(BuildContext context) {
     _sizeW = MediaQuery.of(context).size.width;
     _sizeH = MediaQuery.of(context).size.height;
+    final basketProvider = Provider.of<BasketProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -183,12 +189,27 @@ class _GarmentDetailsPageState extends State<GarmentDetailsPage>
                                   child: Row(
                                     children: [
                                       Expanded(
-                                          child: RowColors(
-                                              colors: widget.garment.colors)),
+                                        child: RowColors(
+                                          colors: widget.garment.colors,
+                                          onSelectColor: (value) {
+                                            _selectedColor = value;
+                                          },
+                                        ),
+                                      ),
                                       AppFilledButton(
                                         text: 'Agregar',
                                         icon: Icons.shopping_cart,
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          basketProvider.addItemToOrder(
+                                              widget.garment.copyWith(),
+                                              _selectedColor);
+
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(makeSnackBar(
+                                                  type: AlertType.success,
+                                                  message:
+                                                      'Prenda agregada a la orden de pedidos'));
+                                        },
                                       ),
                                     ],
                                   ),
