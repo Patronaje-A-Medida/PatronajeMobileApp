@@ -1,12 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:patronaje_mobile_app/domain/models/auth/user_client_update.dart';
-import 'package:patronaje_mobile_app/persistence/local/implements/user_local_data_repository.dart';
 
 class ProfileProvider extends ChangeNotifier {
-  final UserLocalDataRepository _userLocalDataRepository;
-
-  ProfileProvider(this._userLocalDataRepository);
-
+  File? _newImageProfile;
   bool _editMode = false;
   late UserClientUpdate _userUpdate = UserClientUpdate(
     id: 0,
@@ -18,6 +18,7 @@ class ProfileProvider extends ChangeNotifier {
 
   bool get editMode => _editMode;
   UserClientUpdate get userUpdate => _userUpdate;
+  File? get newImageProfile => _newImageProfile;
 
   set editMode(bool value) {
     _editMode = value;
@@ -40,6 +41,18 @@ class ProfileProvider extends ChangeNotifier {
       height: h,
       phone: phone,
     );
+  }
+
+  Future<void> selectPhoto() async {
+    try {
+      final photo = await ImagePicker().pickImage(source: ImageSource.camera);
+      if (photo == null) return;
+
+      _newImageProfile = File(photo.path);
+      notifyListeners();
+    } on PlatformException catch (err) {
+      print('Error al tomar la imagen ${err.toString()}');
+    }
   }
 
   String? validateNameUser(String? value) {

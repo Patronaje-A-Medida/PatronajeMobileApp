@@ -42,9 +42,7 @@ class AppWidget extends StatelessWidget {
         ),
         ChangeNotifierProvider(create: (_) => MeasuresGuideProvider()),
         ChangeNotifierProvider(create: (_) => TakeMeasuresProvider()),
-        ChangeNotifierProvider(
-          create: (_) => ProfileProvider(UserLocalDataRepository()),
-        ),
+        ChangeNotifierProvider(create: (_) => ProfileProvider()),
       ],
       child: MaterialApp(
         title: 'PRY2021251',

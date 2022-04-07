@@ -30,9 +30,10 @@ class ProfileEditMode extends StatelessWidget {
                   Align(
                     alignment: Alignment.center,
                     child: ClipOval(
-                      child: Image.network(
-                        userDataProvider.userData.imageProfile,
-                      ),
+                      child: profileProvider.newImageProfile != null
+                          ? Image.file(profileProvider.newImageProfile!)
+                          : Image.network(
+                              userDataProvider.userData.imageProfile),
                     ),
                   ),
                   Positioned(
