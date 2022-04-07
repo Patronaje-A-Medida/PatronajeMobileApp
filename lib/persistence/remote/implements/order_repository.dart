@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:patronaje_mobile_app/domain/handlers/exceptions/general_exception.dart';
 import 'package:patronaje_mobile_app/domain/models/errors/error_detail.dart';
 import 'package:patronaje_mobile_app/domain/models/garments/order.dart';
+import 'package:patronaje_mobile_app/domain/models/orders/order_create.dart';
 import 'package:patronaje_mobile_app/domain/utils/constants/api_constant.dart';
 import 'package:patronaje_mobile_app/persistence/local/implements/user_local_data_repository.dart';
 import 'package:patronaje_mobile_app/persistence/remote/interfaces/base_order_repository.dart';
@@ -31,6 +32,32 @@ class OrderRepository implements BaseOrderRepository {
       final orders =
           (response.data as List).map((e) => Order.fromMap(e)).toList();
       return orders;
+    } on SocketException catch (err) {
+      throw GeneralException(message: err.message, errorCode: 500);
+    } on DioError catch (err) {
+      final errorResponse = ErrorDetail.fromMap(err.response?.data);
+      throw GeneralException.fromErrorResponse(errorResponse);
+    } on Exception catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<bool> createOrder(OrderCreate orderCreate) async {
+    try {
+      const url = _baseUrl + '/create';
+      orderCreate = orderCreate.copyWith(orderDate: DateTime.now());
+
+      final request = orderCreate.toJson();
+      final response = await _dio.post(url, data: request);
+
+      if (response.statusCode != 200) {
+        final errorResponse = ErrorDetail.fromMap(response.data);
+        throw GeneralException.fromErrorResponse(errorResponse);
+      }
+
+      final bool result = response.data;
+      return result;
     } on SocketException catch (err) {
       throw GeneralException(message: err.message, errorCode: 500);
     } on DioError catch (err) {

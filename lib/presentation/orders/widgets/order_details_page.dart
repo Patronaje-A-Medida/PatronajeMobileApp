@@ -19,7 +19,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Detalle de la orden'),
+        title: const Text('Detalle del pedido'),
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back_ios,
@@ -88,7 +88,9 @@ class _OrderDetailsPageState extends State<OrderDetailsPage>
                                     children: [
                                       Expanded(
                                           child: RowColors(
-                                              colors: [orderDetail.color])),
+                                        colors: [orderDetail.color],
+                                        onSelectColor: null,
+                                      )),
                                     ],
                                   ),
                                 ),

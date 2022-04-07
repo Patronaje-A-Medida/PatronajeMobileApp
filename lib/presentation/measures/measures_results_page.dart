@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:patronaje_mobile_app/business/basket/basket_provider.dart';
 import 'package:patronaje_mobile_app/business/measures/take_measures_provider.dart';
 import 'package:patronaje_mobile_app/domain/utils/themes/color_theme.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +14,7 @@ class MeasuresResultsPage extends StatelessWidget {
     final basicMeasures = takeMeasuresProvider.basicMeasures;
     final otherMeasures = takeMeasuresProvider.otherMeasures;
     final sizeH = MediaQuery.of(context).size.height;
-
+    Provider.of<BasketProvider>(context).canMakeOrder = true;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Resultados'),

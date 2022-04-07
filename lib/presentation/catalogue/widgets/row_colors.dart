@@ -3,7 +3,13 @@ import 'package:patronaje_mobile_app/domain/utils/extensions/hex_color.dart';
 
 class RowColors extends StatefulWidget {
   final List<String> colors;
-  const RowColors({Key? key, required this.colors}) : super(key: key);
+  final Function(String)? onSelectColor;
+  //final
+  const RowColors({
+    Key? key,
+    required this.colors,
+    required this.onSelectColor,
+  }) : super(key: key);
 
   @override
   State<RowColors> createState() => _RowColorsState();
@@ -11,6 +17,15 @@ class RowColors extends StatefulWidget {
 
 class _RowColorsState extends State<RowColors> {
   int selectedIndex = 0;
+
+  @override
+  void initState() {
+    if (widget.onSelectColor != null) {
+      widget.onSelectColor!(widget.colors[0]);
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -18,6 +33,7 @@ class _RowColorsState extends State<RowColors> {
         return InkWell(
           onTap: () {
             setState(() {
+              widget.onSelectColor!(widget.colors[index]);
               selectedIndex = index;
             });
           },
