@@ -1,28 +1,31 @@
-import 'package:flutter/cupertino.dart';
-import 'package:patronaje_mobile_app/domain/models/auth/user_create.dart';
+import 'package:flutter/foundation.dart';
+import 'package:patronaje_mobile_app/domain/models/auth/user_client_update.dart';
+import 'package:patronaje_mobile_app/persistence/local/implements/user_local_data_repository.dart';
 
-class SignUpFormProvider extends ChangeNotifier {
-  late bool _termsAndConditions = false;
-  late UserCreate _userCreate = UserCreate(
-      email: '',
-      password: '',
-      nameUser: '',
-      lastNameUser: '',
-      height: 0,
-      phone: '');
+class ProfileProvider extends ChangeNotifier {
+  final UserLocalDataRepository _userLocalDataRepository;
 
-  UserCreate get userCreate => _userCreate;
+  ProfileProvider(this._userLocalDataRepository);
 
-  bool get termsAndConditions => _termsAndConditions;
+  bool _editMode = false;
+  late UserClientUpdate _userUpdate = UserClientUpdate(
+    id: 0,
+    nameUser: '',
+    lastNameUser: '',
+    height: 0,
+    phone: '',
+  );
 
-  set termsAndConditions(bool value) {
-    _termsAndConditions = value;
+  bool get editMode => _editMode;
+  UserClientUpdate get userUpdate => _userUpdate;
+
+  set editMode(bool value) {
+    _editMode = value;
     notifyListeners();
   }
 
-  void buildUserCreate({
-    String? email,
-    String? password,
+  void buildUserUpdate({
+    int? id,
     String? nameUser,
     String? lastNameUser,
     String? height,
@@ -30,39 +33,13 @@ class SignUpFormProvider extends ChangeNotifier {
   }) {
     double? h;
     if (height != null && height.isNotEmpty) h = double.parse(height);
-    _userCreate = _userCreate.copyWith(
-      email: email,
-      password: password,
+    _userUpdate = _userUpdate.copyWith(
+      id: id,
       nameUser: nameUser,
       lastNameUser: lastNameUser,
       height: h,
       phone: phone,
     );
-  }
-
-  String? validateEmail(String? value) {
-    if (value == null || value.isEmpty) return 'El correo es requerido.';
-
-    const emailRegex =
-        r"""^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""";
-
-    if (!RegExp(emailRegex).hasMatch(value)) {
-      return 'Formato de correo inválido.';
-    } else {
-      return null;
-    }
-  }
-
-  String? validatePassword(String? value) {
-    if (value == null || value.isEmpty) return 'La contraseña es requerida.';
-
-    const passwordRegex = r"""^(?=.*?[a-z])(?=.*?[0-9]).{8,20}$""";
-
-    if (!RegExp(passwordRegex).hasMatch(value)) {
-      return 'Mínimo 8 caracteres y máximo 20, \nademás contener al menos una letra y un número.';
-    } else {
-      return null;
-    }
   }
 
   String? validateNameUser(String? value) {
@@ -115,12 +92,5 @@ class SignUpFormProvider extends ChangeNotifier {
     } else {
       return null;
     }
-  }
-
-  String? validateTermsAndConditions() {
-    if (!_termsAndConditions) {
-      return 'Tienes que aceptar los términos y condiciones de uso.';
-    }
-    return null;
   }
 }
