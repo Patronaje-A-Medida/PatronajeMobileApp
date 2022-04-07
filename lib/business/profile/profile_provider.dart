@@ -45,7 +45,7 @@ class ProfileProvider extends ChangeNotifier {
 
   Future<void> selectPhoto() async {
     try {
-      final photo = await ImagePicker().pickImage(source: ImageSource.camera);
+      final photo = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (photo == null) return;
 
       _newImageProfile = File(photo.path);
