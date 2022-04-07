@@ -1,28 +1,32 @@
-import 'package:flutter/cupertino.dart';
-import 'package:patronaje_mobile_app/domain/models/auth/user_create.dart';
+import 'dart:io';
 
-class SignUpFormProvider extends ChangeNotifier {
-  late bool _termsAndConditions = false;
-  late UserCreate _userCreate = UserCreate(
-      email: '',
-      password: '',
-      nameUser: '',
-      lastNameUser: '',
-      height: 0,
-      phone: '');
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:patronaje_mobile_app/domain/models/auth/user_client_update.dart';
 
-  UserCreate get userCreate => _userCreate;
+class ProfileProvider extends ChangeNotifier {
+  File? _newImageProfile;
+  bool _editMode = false;
+  late UserClientUpdate _userUpdate = UserClientUpdate(
+    id: 0,
+    nameUser: '',
+    lastNameUser: '',
+    height: 0,
+    phone: '',
+  );
 
-  bool get termsAndConditions => _termsAndConditions;
+  bool get editMode => _editMode;
+  UserClientUpdate get userUpdate => _userUpdate;
+  File? get newImageProfile => _newImageProfile;
 
-  set termsAndConditions(bool value) {
-    _termsAndConditions = value;
+  set editMode(bool value) {
+    _editMode = value;
     notifyListeners();
   }
 
-  void buildUserCreate({
-    String? email,
-    String? password,
+  void buildUserUpdate({
+    int? id,
     String? nameUser,
     String? lastNameUser,
     String? height,
@@ -30,9 +34,8 @@ class SignUpFormProvider extends ChangeNotifier {
   }) {
     double? h;
     if (height != null && height.isNotEmpty) h = double.parse(height);
-    _userCreate = _userCreate.copyWith(
-      email: email,
-      password: password,
+    _userUpdate = _userUpdate.copyWith(
+      id: id,
       nameUser: nameUser,
       lastNameUser: lastNameUser,
       height: h,
@@ -40,28 +43,15 @@ class SignUpFormProvider extends ChangeNotifier {
     );
   }
 
-  String? validateEmail(String? value) {
-    if (value == null || value.isEmpty) return 'El correo es requerido.';
+  Future<void> selectPhoto() async {
+    try {
+      final photo = await ImagePicker().pickImage(source: ImageSource.camera);
+      if (photo == null) return;
 
-    const emailRegex =
-        r"""^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""";
-
-    if (!RegExp(emailRegex).hasMatch(value)) {
-      return 'Formato de correo inválido.';
-    } else {
-      return null;
-    }
-  }
-
-  String? validatePassword(String? value) {
-    if (value == null || value.isEmpty) return 'La contraseña es requerida.';
-
-    const passwordRegex = r"""^(?=.*?[a-z])(?=.*?[0-9]).{8,20}$""";
-
-    if (!RegExp(passwordRegex).hasMatch(value)) {
-      return 'Mínimo 8 caracteres y máximo 20, \nademás contener al menos una letra y un número.';
-    } else {
-      return null;
+      _newImageProfile = File(photo.path);
+      notifyListeners();
+    } on PlatformException catch (err) {
+      print('Error al tomar la imagen ${err.toString()}');
     }
   }
 
@@ -117,10 +107,8 @@ class SignUpFormProvider extends ChangeNotifier {
     }
   }
 
-  String? validateTermsAndConditions() {
-    if (!_termsAndConditions) {
-      return 'Tienes que aceptar los términos y condiciones de uso.';
-    }
-    return null;
+  void resetImageProfile() {
+    _newImageProfile = null;
+    notifyListeners();
   }
 }

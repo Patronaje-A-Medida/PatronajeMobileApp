@@ -202,7 +202,7 @@ class SignUpForm extends StatelessWidget {
                         ScaffoldMessenger.of(context).showSnackBar(
                           makeSnackBar(
                             type: AlertType.success,
-                            message: 'Registro de usuario exitoso',
+                            message: 'Registro de usuario exitoso.',
                           ),
                         );
 

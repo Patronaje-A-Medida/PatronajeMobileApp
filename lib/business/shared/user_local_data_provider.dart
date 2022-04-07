@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:patronaje_mobile_app/domain/models/auth/user_client_token.dart';
+import 'package:patronaje_mobile_app/domain/models/auth/user_read.dart';
 import 'package:patronaje_mobile_app/domain/models/hive/user_local_data.dart';
 import 'package:patronaje_mobile_app/persistence/local/implements/user_local_data_repository.dart';
 
@@ -28,7 +29,7 @@ class UserLocalDataProvider extends ChangeNotifier {
 
   UserLocalDataProvider(this._userLocalDataRepository);
 
-  createUser(UserClientToken userClientToken) async {
+  void createUser(UserClientToken userClientToken) async {
     final UserLocalData userLocalData = UserLocalData(
       id: userClientToken.userInfo.id,
       email: userClientToken.userInfo.email,
@@ -46,9 +47,10 @@ class UserLocalDataProvider extends ChangeNotifier {
     );
 
     await _userLocalDataRepository.saveUserLocalData(userLocalData);
+    notifyListeners();
   }
 
-  updateUser(UserClientToken userClientToken) async {
+  void updateUser(UserClientToken userClientToken) async {
     var currentUser = _userLocalDataRepository.getUserLocalData();
     currentUser.id = userClientToken.userInfo.id;
     currentUser.email = userClientToken.userInfo.email;
@@ -63,5 +65,22 @@ class UserLocalDataProvider extends ChangeNotifier {
         'https://firebasestorage.googleapis.com/v0/b/pry2021251-pam.appspot.com/o/profiles%2Fclient-default.png?alt=media&token=e859abd2-fb48-477b-9ca0-d446f5acedf5';
 
     await _userLocalDataRepository.saveUserLocalData(currentUser);
+    notifyListeners();
+  }
+
+  void updateUserByUserRead(UserRead userRead) async {
+    var currentUser = _userLocalDataRepository.getUserLocalData();
+    currentUser.id = userRead.id;
+    currentUser.email = userRead.email;
+    currentUser.names = userRead.nameUser;
+    currentUser.lastNames = userRead.lastNameUser;
+    currentUser.userId = userRead.userId;
+    currentUser.height = userRead.height;
+    currentUser.phone = userRead.phone;
+    currentUser.imageProfile = userRead.imageProfile ??
+        'https://firebasestorage.googleapis.com/v0/b/pry2021251-pam.appspot.com/o/profiles%2Fclient-default.png?alt=media&token=e859abd2-fb48-477b-9ca0-d446f5acedf5';
+
+    await _userLocalDataRepository.saveUserLocalData(currentUser);
+    notifyListeners();
   }
 }

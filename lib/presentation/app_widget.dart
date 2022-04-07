@@ -3,6 +3,7 @@ import 'package:patronaje_mobile_app/business/auth/auth_provider.dart';
 import 'package:patronaje_mobile_app/business/garments/garment_provider.dart';
 import 'package:patronaje_mobile_app/business/measures/take_measures_provider.dart';
 import 'package:patronaje_mobile_app/business/on_boarding_measures/measures_guide_provider.dart';
+import 'package:patronaje_mobile_app/business/profile/profile_provider.dart';
 import 'package:patronaje_mobile_app/business/shared/configuration_types_provider.dart';
 import 'package:patronaje_mobile_app/business/shared/navigation_provider.dart';
 import 'package:patronaje_mobile_app/business/shared/sign_in_form_provider.dart';
@@ -41,6 +42,7 @@ class AppWidget extends StatelessWidget {
         ),
         ChangeNotifierProvider(create: (_) => MeasuresGuideProvider()),
         ChangeNotifierProvider(create: (_) => TakeMeasuresProvider()),
+        ChangeNotifierProvider(create: (_) => ProfileProvider()),
       ],
       child: MaterialApp(
         title: 'PRY2021251',

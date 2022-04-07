@@ -10,8 +10,8 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userData =
-        Provider.of<UserLocalDataProvider>(context, listen: false).userData;
+    final userData = Provider.of<UserLocalDataProvider>(context).userData;
+
     return Drawer(
       backgroundColor: Palette.pink.shade50,
       child: Padding(

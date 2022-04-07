@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:patronaje_mobile_app/domain/handlers/exceptions/general_exception.dart';
 import 'package:patronaje_mobile_app/domain/models/auth/user_client_token.dart';
+import 'package:patronaje_mobile_app/domain/models/auth/user_client_update.dart';
 import 'package:patronaje_mobile_app/domain/models/auth/user_create.dart';
 import 'package:patronaje_mobile_app/domain/models/auth/user_login.dart';
+import 'package:patronaje_mobile_app/domain/models/auth/user_read.dart';
 
 import 'package:patronaje_mobile_app/persistence/remote/implements/auth_repository.dart';
 
@@ -46,6 +50,30 @@ class AuthProvider extends ChangeNotifier {
       _isLoading = false;
       _errorMessage = err.message;
       notifyListeners();
+      rethrow;
+    }
+  }
+
+  Future<UserRead> updateProfile(UserClientUpdate userClientUpdate) async {
+    try {
+      final result = await _authRepository.updateProfile(userClientUpdate);
+      notifyListeners();
+      return result;
+    } on GeneralException catch (err) {
+      _isLoading = false;
+      _errorMessage = err.message;
+      notifyListeners();
+      rethrow;
+    }
+  }
+
+  Future<String> uploadImageProfile(int userId, File imageFile) async {
+    try {
+      final result =
+          await _authRepository.uploadImageProfile(userId, imageFile);
+      notifyListeners();
+      return result;
+    } on GeneralException catch (_) {
       rethrow;
     }
   }

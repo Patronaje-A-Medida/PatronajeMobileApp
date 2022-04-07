@@ -186,7 +186,6 @@ class TakeMeasuresPage extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 12.0),
                 child: AppFilledButton(
                   text: 'Calcular medidas',
-                  //icon: Icons.camera_alt_rounded,
                   onPressed: () {
                     if (takeMeasuresProvider.canCalculateMeasures) {
                       takeMeasuresProvider.calculateMeasures();
