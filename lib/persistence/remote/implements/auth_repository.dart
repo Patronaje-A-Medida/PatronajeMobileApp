@@ -86,4 +86,34 @@ class AuthRepository extends BaseAuthRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<String> uploadImageProfile(int userId, File imageFile) async {
+    try {
+      final url = _baseUrl + '/profiles/upload-client-image/$userId';
+
+      final fileName = imageFile.path.split('/').last;
+      FormData formData = FormData.fromMap({
+        'imageFile':
+            await MultipartFile.fromFile(imageFile.path, filename: fileName),
+      });
+
+      final response = await _dio.post(url, data: formData);
+
+      if (response.statusCode != 200) {
+        final errorResponse = ErrorDetail.fromMap(response.data);
+        throw GeneralException.fromErrorResponse(errorResponse);
+      }
+
+      final String imageUrl = response.data;
+      return imageUrl;
+    } on DioError catch (err) {
+      final errorResponse = ErrorDetail.fromMap(err.response?.data);
+      throw GeneralException.fromErrorResponse(errorResponse);
+    } on SocketException catch (err) {
+      throw GeneralException(message: err.message, errorCode: 500);
+    } on Exception catch (_) {
+      rethrow;
+    }
+  }
 }
