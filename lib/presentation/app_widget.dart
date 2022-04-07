@@ -3,6 +3,7 @@ import 'package:patronaje_mobile_app/business/auth/auth_provider.dart';
 import 'package:patronaje_mobile_app/business/garments/garment_provider.dart';
 import 'package:patronaje_mobile_app/business/measures/take_measures_provider.dart';
 import 'package:patronaje_mobile_app/business/on_boarding_measures/measures_guide_provider.dart';
+import 'package:patronaje_mobile_app/business/orders/order_provider.dart';
 import 'package:patronaje_mobile_app/business/profile/profile_provider.dart';
 import 'package:patronaje_mobile_app/business/shared/configuration_types_provider.dart';
 import 'package:patronaje_mobile_app/business/shared/navigation_provider.dart';
@@ -14,6 +15,7 @@ import 'package:patronaje_mobile_app/persistence/local/implements/user_local_dat
 import 'package:patronaje_mobile_app/persistence/remote/implements/auth_repository.dart';
 import 'package:patronaje_mobile_app/persistence/remote/implements/configuration_types_repository.dart';
 import 'package:patronaje_mobile_app/persistence/remote/implements/garment_repository.dart';
+import 'package:patronaje_mobile_app/persistence/remote/implements/order_repository.dart';
 import 'package:patronaje_mobile_app/presentation/welcome/welcome_page.dart';
 import 'package:provider/provider.dart';
 
@@ -43,6 +45,10 @@ class AppWidget extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => MeasuresGuideProvider()),
         ChangeNotifierProvider(create: (_) => TakeMeasuresProvider()),
         ChangeNotifierProvider(create: (_) => ProfileProvider()),
+        ChangeNotifierProvider(
+            create: (_) =>
+                OrderProvider(OrderRepository(UserLocalDataRepository()))
+                  ..getOrdersByIdCliente()),
       ],
       child: MaterialApp(
         title: 'PRY2021251',

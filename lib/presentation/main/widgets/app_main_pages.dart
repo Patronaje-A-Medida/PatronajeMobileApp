@@ -5,6 +5,7 @@ import 'package:patronaje_mobile_app/domain/utils/themes/color_theme.dart';
 import 'package:patronaje_mobile_app/presentation/catalogue/catalogue_page.dart';
 import 'package:patronaje_mobile_app/presentation/home/home_page.dart';
 import 'package:patronaje_mobile_app/presentation/on_boarding_measures/on_boarding_page.dart';
+import 'package:patronaje_mobile_app/presentation/orders/orders_page.dart';
 import 'package:patronaje_mobile_app/presentation/shared/transition_page_route.dart';
 import 'package:provider/provider.dart';
 
@@ -40,9 +41,7 @@ class AppMainPages extends StatelessWidget {
           color: Palette.green.shade200,
         ),
         const CataloguePage(),
-        Container(
-          color: Palette.orange.shade200,
-        ),
+        const OrdersPage(),
       ],
     );
   }
