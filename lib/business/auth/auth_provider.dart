@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:patronaje_mobile_app/domain/handlers/exceptions/general_exception.dart';
 import 'package:patronaje_mobile_app/domain/models/auth/user_client_token.dart';
@@ -54,16 +56,24 @@ class AuthProvider extends ChangeNotifier {
 
   Future<UserRead> updateProfile(UserClientUpdate userClientUpdate) async {
     try {
-      _isLoading = true;
-      notifyListeners();
       final result = await _authRepository.updateProfile(userClientUpdate);
-      _isLoading = false;
       notifyListeners();
       return result;
     } on GeneralException catch (err) {
       _isLoading = false;
       _errorMessage = err.message;
       notifyListeners();
+      rethrow;
+    }
+  }
+
+  Future<String> uploadImageProfile(int userId, File imageFile) async {
+    try {
+      final result =
+          await _authRepository.uploadImageProfile(userId, imageFile);
+      notifyListeners();
+      return result;
+    } on GeneralException catch (_) {
       rethrow;
     }
   }

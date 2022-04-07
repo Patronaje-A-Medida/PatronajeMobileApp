@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:patronaje_mobile_app/domain/models/auth/user_client_token.dart';
-import 'package:patronaje_mobile_app/domain/models/auth/user_client_update.dart';
 import 'package:patronaje_mobile_app/domain/models/auth/user_read.dart';
 import 'package:patronaje_mobile_app/domain/models/hive/user_local_data.dart';
 import 'package:patronaje_mobile_app/persistence/local/implements/user_local_data_repository.dart';
@@ -48,6 +47,7 @@ class UserLocalDataProvider extends ChangeNotifier {
     );
 
     await _userLocalDataRepository.saveUserLocalData(userLocalData);
+    notifyListeners();
   }
 
   void updateUser(UserClientToken userClientToken) async {
@@ -65,6 +65,7 @@ class UserLocalDataProvider extends ChangeNotifier {
         'https://firebasestorage.googleapis.com/v0/b/pry2021251-pam.appspot.com/o/profiles%2Fclient-default.png?alt=media&token=e859abd2-fb48-477b-9ca0-d446f5acedf5';
 
     await _userLocalDataRepository.saveUserLocalData(currentUser);
+    notifyListeners();
   }
 
   void updateUserByUserRead(UserRead userRead) async {
@@ -80,5 +81,6 @@ class UserLocalDataProvider extends ChangeNotifier {
         'https://firebasestorage.googleapis.com/v0/b/pry2021251-pam.appspot.com/o/profiles%2Fclient-default.png?alt=media&token=e859abd2-fb48-477b-9ca0-d446f5acedf5';
 
     await _userLocalDataRepository.saveUserLocalData(currentUser);
+    notifyListeners();
   }
 }

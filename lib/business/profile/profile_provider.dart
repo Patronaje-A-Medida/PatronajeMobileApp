@@ -106,4 +106,9 @@ class ProfileProvider extends ChangeNotifier {
       return null;
     }
   }
+
+  void resetImageProfile() {
+    _newImageProfile = null;
+    notifyListeners();
+  }
 }
