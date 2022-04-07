@@ -74,17 +74,17 @@ class OrderDetailRead {
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-    return o is OrderDetailRead &&
-        o.id == id &&
-        o.nameGarment == nameGarment &&
-        o.color == color &&
-        o.quantity == quantity &&
-        o.price == price &&
-        o.imageUrl == imageUrl &&
-        o.orderDetailStatus == orderDetailStatus;
+    return other is OrderDetailRead &&
+        other.id == id &&
+        other.nameGarment == nameGarment &&
+        other.color == color &&
+        other.quantity == quantity &&
+        other.price == price &&
+        other.imageUrl == imageUrl &&
+        other.orderDetailStatus == orderDetailStatus;
   }
 
   @override

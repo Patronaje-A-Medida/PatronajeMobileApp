@@ -8,6 +8,7 @@ class Order {
   final int id;
   final int userClientId;
   final String nameAtelier;
+  final String atelierAddress;
   final String codeOrder;
   final double price;
   final DateTime orderDate;
@@ -18,6 +19,7 @@ class Order {
     required this.id,
     required this.userClientId,
     required this.nameAtelier,
+    required this.atelierAddress,
     required this.codeOrder,
     required this.price,
     required this.orderDate,
@@ -29,6 +31,7 @@ class Order {
     int? id,
     int? userClientId,
     String? nameAtelier,
+    String? atelierAddress,
     String? codeOrder,
     double? price,
     DateTime? orderDate,
@@ -39,6 +42,7 @@ class Order {
       id: id ?? this.id,
       userClientId: userClientId ?? this.userClientId,
       nameAtelier: nameAtelier ?? this.nameAtelier,
+      atelierAddress: atelierAddress ?? this.atelierAddress,
       codeOrder: codeOrder ?? this.codeOrder,
       price: price ?? this.price,
       orderDate: orderDate ?? this.orderDate,
@@ -52,6 +56,7 @@ class Order {
       'id': id,
       'userClientId': userClientId,
       'nameAtelier': nameAtelier,
+      'atelierAddress': atelierAddress,
       'codeOrder': codeOrder,
       'price': price,
       'orderDate': orderDate,
@@ -65,6 +70,7 @@ class Order {
       id: map['id'],
       userClientId: map['userClientId'],
       nameAtelier: map['nameAtelier'],
+      atelierAddress: map['atelierAddress'],
       codeOrder: map['codeOrder'],
       price: map['price'],
       orderDate: DateTime.parse(map['orderDate'].toString()),
@@ -84,18 +90,19 @@ class Order {
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
 
-    return o is Order &&
-        o.id == id &&
-        o.userClientId == userClientId &&
-        o.nameAtelier == nameAtelier &&
-        o.codeOrder == codeOrder &&
-        o.price == price &&
-        o.orderDate == orderDate &&
-        o.orderStatus == orderStatus &&
-        listEquals(o.details, details);
+    return other is Order &&
+        other.id == id &&
+        other.userClientId == userClientId &&
+        other.nameAtelier == nameAtelier &&
+        other.atelierAddress == atelierAddress &&
+        other.codeOrder == codeOrder &&
+        other.price == price &&
+        other.orderDate == orderDate &&
+        other.orderStatus == orderStatus &&
+        listEquals(other.details, details);
   }
 
   @override
@@ -103,6 +110,7 @@ class Order {
     return id.hashCode ^
         userClientId.hashCode ^
         nameAtelier.hashCode ^
+        atelierAddress.hashCode ^
         codeOrder.hashCode ^
         price.hashCode ^
         orderDate.hashCode ^
