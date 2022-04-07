@@ -19,7 +19,7 @@ class OrderRepository implements BaseOrderRepository {
   Future<List<Order>> getOrdersByClientId() async {
     try {
       final userLocalData = _userLocalRepository.getUserLocalData();
-      const url = _baseUrl + '/mobile'; //TODO
+      const url = _baseUrl + '/by-client'; //TODO
 
       final response = await _dio
           .get(url, queryParameters: {'clientId': userLocalData.id}); //TODO
@@ -30,7 +30,8 @@ class OrderRepository implements BaseOrderRepository {
       }
       final orders =
           (response.data as List).map((e) => Order.fromMap(e)).toList();
-
+      print("===================data orders 2");
+      print(orders.toString());
       return orders;
     } on SocketException catch (err) {
       throw GeneralException(message: err.message, errorCode: 500);
