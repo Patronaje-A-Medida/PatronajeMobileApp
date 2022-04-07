@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:patronaje_mobile_app/business/shared/user_local_data_provider.dart';
 import 'package:patronaje_mobile_app/domain/utils/themes/color_theme.dart';
+import 'package:patronaje_mobile_app/presentation/measures/history_measures_page.dart';
 import 'package:patronaje_mobile_app/presentation/profile/profile_page.dart';
 import 'package:patronaje_mobile_app/presentation/shared/transition_page_route.dart';
 import 'package:provider/provider.dart';
@@ -52,7 +53,16 @@ class AppDrawer extends StatelessWidget {
               leading: const Icon(Icons.accessibility_new_rounded),
               iconColor: Colors.black,
               title: const Text('Historial de medidas'),
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  TransitionPageRoute(
+                    child: const HistoryMeasuresPage(),
+                    direction: AxisDirection.right,
+                  ),
+                );
+              },
             ),
             ListTile(
               leading: const Icon(Icons.logout),
