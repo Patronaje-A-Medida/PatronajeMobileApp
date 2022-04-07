@@ -31,9 +31,18 @@ class ProfileEditMode extends StatelessWidget {
                     alignment: Alignment.center,
                     child: ClipOval(
                       child: profileProvider.newImageProfile != null
-                          ? Image.file(profileProvider.newImageProfile!)
+                          ? Image.file(
+                              profileProvider.newImageProfile!,
+                              height: double.infinity,
+                              width: double.infinity,
+                              fit: BoxFit.cover,
+                            )
                           : Image.network(
-                              userDataProvider.userData.imageProfile),
+                              userDataProvider.userData.imageProfile,
+                              height: double.infinity,
+                              width: double.infinity,
+                              fit: BoxFit.cover,
+                            ),
                     ),
                   ),
                   Positioned(
@@ -42,7 +51,9 @@ class ProfileEditMode extends StatelessWidget {
                     child: IconButton(
                       icon: const Icon(Icons.photo_camera_rounded),
                       iconSize: 32.0,
-                      onPressed: () {},
+                      onPressed: () {
+                        profileProvider.selectPhoto();
+                      },
                     ),
                   ),
                 ],
@@ -79,6 +90,14 @@ class ProfileEditMode extends StatelessWidget {
                   try {
                     profileProvider.buildUserUpdate(
                         id: userDataProvider.userData.id);
+
+                    if (profileProvider.newImageProfile != null) {
+                      await Provider.of<AuthProvider>(context, listen: false)
+                          .uploadImageProfile(
+                        userDataProvider.userData.id,
+                        profileProvider.newImageProfile!,
+                      );
+                    }
 
                     final result =
                         await Provider.of<AuthProvider>(context, listen: false)

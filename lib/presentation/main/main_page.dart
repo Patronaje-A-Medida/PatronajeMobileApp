@@ -31,6 +31,9 @@ class MainPage extends StatelessWidget {
                   child: ClipOval(
                     child: Image.network(
                       userLocalData.imageProfile,
+                      fit: BoxFit.cover,
+                      height: double.infinity,
+                      width: double.infinity,
                     ),
                   ),
                 ),

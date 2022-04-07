@@ -28,37 +28,16 @@ class ProfileReadMode extends StatelessWidget {
                   child: ClipOval(
                     child: Image.network(
                       userDataProvider.userData.imageProfile,
+                      height: sizeH * 0.25,
+                      width: sizeH * 0.25,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
-                /*Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: IconButton(
-                        icon: const Icon(Icons.photo_camera_rounded),
-                        iconSize: 32.0,
-                        onPressed: () {},
-                      ),
-                    ),*/
               ],
             ),
           ),
         ),
-        /*TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Apellidos',
-                labelStyle: TextStyle(fontWeight: FontWeight.w500),
-              ),
-              initialValue: 'Mi nombre',
-              //readOnly: true,
-            ),*/
-        /*const Padding(
-              padding: EdgeInsets.symmetric(vertical: 12.0),
-              child: Text(
-                'Editar',
-                textAlign: TextAlign.end,
-              ),
-            ),*/
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [

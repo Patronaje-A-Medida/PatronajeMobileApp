@@ -23,6 +23,7 @@ class ProfilePage extends StatelessWidget {
             ),
             onPressed: () {
               FocusManager.instance.primaryFocus?.unfocus();
+              profileProvider.resetImageProfile();
               Future.delayed(const Duration(seconds: 1),
                   () => profileProvider.editMode = false);
               Navigator.pop(context);
