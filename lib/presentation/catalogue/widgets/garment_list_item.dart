@@ -11,6 +11,8 @@ class GarmentListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+
         Navigator.of(context).push(
           PageRouteBuilder(pageBuilder: (context, animation, _) {
             return FadeTransition(

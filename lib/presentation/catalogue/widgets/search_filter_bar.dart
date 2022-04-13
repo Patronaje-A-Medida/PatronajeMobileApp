@@ -36,6 +36,8 @@ class SearchAndFilterBar extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.filter_list_rounded),
             onPressed: () {
+              FocusManager.instance.primaryFocus?.unfocus();
+
               showModalBottomSheet(
                   context: context,
                   shape: const RoundedRectangleBorder(

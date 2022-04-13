@@ -44,7 +44,9 @@ class CataloguePage extends StatelessWidget {
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
-                : const GarmentGridList(),
+                : garmentProvider.garments.isNotEmpty
+                    ? const GarmentGridList()
+                    : const Center(child: Text('No se encontraron prendas.')),
           ),
         ),
       ],
