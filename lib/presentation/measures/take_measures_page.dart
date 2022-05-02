@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:patronaje_mobile_app/business/measures/take_measures_provider.dart';
+import 'package:patronaje_mobile_app/business/shared/user_local_data_provider.dart';
 import 'package:patronaje_mobile_app/domain/utils/enums/general_enums.dart';
 import 'package:patronaje_mobile_app/domain/utils/themes/color_theme.dart';
 import 'package:patronaje_mobile_app/presentation/measures/measures_results_page.dart';
@@ -15,9 +16,11 @@ class TakeMeasuresPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final sizeH = MediaQuery.of(context).size.height;
     final takeMeasuresProvider = Provider.of<TakeMeasuresProvider>(context);
+    final userLocalProvider = Provider.of<UserLocalDataProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Toma de Medidas Corporales'),
+        title: Text(
+            'Toma de Medidas Corporales ${userLocalProvider.userData.height * 100}'),
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back_ios,
@@ -105,7 +108,8 @@ class TakeMeasuresPage extends StatelessWidget {
               AppFilledButton(
                 text: '',
                 icon: Icons.camera_alt_rounded,
-                onPressed: () => takeMeasuresProvider.takePhotoFrontal(),
+                onPressed: () =>
+                    takeMeasuresProvider.takePhotoFrontal(source: 2),
               ),
               const SizedBox(height: 12),
               Row(
@@ -180,7 +184,8 @@ class TakeMeasuresPage extends StatelessWidget {
               AppFilledButton(
                 text: '',
                 icon: Icons.camera_alt_rounded,
-                onPressed: () => takeMeasuresProvider.takePhotoLateral(),
+                onPressed: () =>
+                    takeMeasuresProvider.takePhotoLateral(source: 2),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 12.0),

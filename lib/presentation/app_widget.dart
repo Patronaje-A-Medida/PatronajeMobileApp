@@ -16,6 +16,7 @@ import 'package:patronaje_mobile_app/persistence/local/implements/user_local_dat
 import 'package:patronaje_mobile_app/persistence/remote/implements/auth_repository.dart';
 import 'package:patronaje_mobile_app/persistence/remote/implements/configuration_types_repository.dart';
 import 'package:patronaje_mobile_app/persistence/remote/implements/garment_repository.dart';
+import 'package:patronaje_mobile_app/persistence/remote/implements/measurement_repository.dart';
 import 'package:patronaje_mobile_app/persistence/remote/implements/order_repository.dart';
 import 'package:patronaje_mobile_app/presentation/welcome/welcome_page.dart';
 import 'package:provider/provider.dart';
@@ -39,20 +40,29 @@ class AppWidget extends StatelessWidget {
           create: (_) => GarmentProvider(GarmentRepository())..getAllByQuery(),
         ),
         ChangeNotifierProvider(
-          create: (_) =>
-              ConfigurationTypesProvider(ConfigurationTypesRepository())
-                ..getAllTypes(),
+          create: (_) => ConfigurationTypesProvider(
+            ConfigurationTypesRepository(),
+          )..getAllTypes(),
         ),
         ChangeNotifierProvider(create: (_) => MeasuresGuideProvider()),
-        ChangeNotifierProvider(create: (_) => TakeMeasuresProvider()),
+        ChangeNotifierProvider(
+          create: (_) => TakeMeasuresProvider(
+            MeasurementRepository(),
+            UserLocalDataRepository(),
+          ),
+        ),
         ChangeNotifierProvider(create: (_) => ProfileProvider()),
         ChangeNotifierProvider(
-            create: (_) =>
-                OrderProvider(OrderRepository(UserLocalDataRepository()))
-                  ..getOrdersByIdCliente()),
+          create: (_) => OrderProvider(
+            OrderRepository(UserLocalDataRepository()),
+          )..getOrdersByIdCliente(),
+        ),
         ChangeNotifierProvider(
-            create: (_) => BasketProvider(UserLocalDataRepository(),
-                OrderRepository(UserLocalDataRepository()))),
+          create: (_) => BasketProvider(
+            UserLocalDataRepository(),
+            OrderRepository(UserLocalDataRepository()),
+          ),
+        ),
       ],
       child: MaterialApp(
         title: 'PRY2021251',

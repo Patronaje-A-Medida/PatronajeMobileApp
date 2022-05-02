@@ -12,7 +12,7 @@ class MeasuresResultsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final takeMeasuresProvider = Provider.of<TakeMeasuresProvider>(context);
     final basicMeasures = takeMeasuresProvider.basicMeasures;
-    final otherMeasures = takeMeasuresProvider.otherMeasures;
+    final otherMeasures = takeMeasuresProvider.allMeasures;
     final sizeH = MediaQuery.of(context).size.height;
     Provider.of<BasketProvider>(context).canMakeOrder = true;
     return Scaffold(
@@ -75,8 +75,8 @@ class MeasuresResultsPage extends StatelessWidget {
                         ],
                         rows: otherMeasures.map((e) {
                           return DataRow(cells: [
-                            DataCell(Text(e.label)),
-                            DataCell(Text(e.value.toString())),
+                            DataCell(Text(e.nameMeasurement)),
+                            DataCell(Text(e.value.toStringAsFixed(2) + ' cm')),
                           ]);
                         }).toList(),
                       ),
@@ -115,7 +115,7 @@ class MeasuresResultsPage extends StatelessWidget {
             foregroundColor: Colors.white,
           ),
         ),
-        Text(measureSize.toString()),
+        Text(measureSize.toStringAsFixed(2)),
       ],
     );
   }
