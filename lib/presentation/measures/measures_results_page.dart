@@ -15,6 +15,7 @@ class MeasuresResultsPage extends StatelessWidget {
     final otherMeasures = takeMeasuresProvider.allMeasures;
     final sizeH = MediaQuery.of(context).size.height;
     Provider.of<BasketProvider>(context).canMakeOrder = true;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Resultados'),

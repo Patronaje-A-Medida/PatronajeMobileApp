@@ -19,7 +19,11 @@ class GarmentGridList extends StatelessWidget {
         itemCount: garmentProvider.garments.length,
         itemBuilder: (context, index) {
           final garment = garmentProvider.garments[index];
-          return GarmentListItem(garment: garment);
+          if (garment.images.isNotEmpty) {
+            return GarmentListItem(garment: garment);
+          } else {
+            return Container();
+          }
         },
       );
     });
