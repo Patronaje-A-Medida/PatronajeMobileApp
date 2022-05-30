@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:patronaje_mobile_app/business/auth/auth_provider.dart';
 import 'package:patronaje_mobile_app/business/basket/basket_provider.dart';
 import 'package:patronaje_mobile_app/business/garments/garment_provider.dart';
+import 'package:patronaje_mobile_app/business/measures/records_measures_provider.dart';
 import 'package:patronaje_mobile_app/business/measures/take_measures_provider.dart';
 import 'package:patronaje_mobile_app/business/on_boarding_measures/measures_guide_provider.dart';
 import 'package:patronaje_mobile_app/business/orders/order_provider.dart';
@@ -64,6 +65,12 @@ class AppWidget extends StatelessWidget {
             UserLocalDataRepository(),
             OrderRepository(UserLocalDataRepository()),
           ),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => RecordsMeasuresProvider(
+            MeasurementRepository(),
+            UserLocalDataRepository(),
+          )..getAllRecords(),
         ),
       ],
       child: MaterialApp(

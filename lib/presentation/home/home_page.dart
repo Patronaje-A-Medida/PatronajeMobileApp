@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:patronaje_mobile_app/business/measures/records_measures_provider.dart';
 import 'package:patronaje_mobile_app/business/shared/user_local_data_provider.dart';
 import 'package:patronaje_mobile_app/presentation/measures/history_measures_page.dart';
 import 'package:patronaje_mobile_app/presentation/on_boarding_measures/on_boarding_page.dart';
@@ -10,9 +11,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sizeW = MediaQuery.of(context).size.width;
-    final sizeH = MediaQuery.of(context).size.height;
-
     return Container(
       color: Colors.white,
       child: Consumer<UserLocalDataProvider>(
@@ -57,6 +55,10 @@ class HomePage extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
+                        Provider.of<RecordsMeasuresProvider>(
+                          context,
+                          listen: false,
+                        ).getAllRecords();
                         Navigator.push(
                           context,
                           TransitionPageRoute(

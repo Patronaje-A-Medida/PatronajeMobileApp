@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:patronaje_mobile_app/business/measures/records_measures_provider.dart';
 import 'package:patronaje_mobile_app/business/shared/user_local_data_provider.dart';
 import 'package:patronaje_mobile_app/domain/utils/themes/color_theme.dart';
 import 'package:patronaje_mobile_app/presentation/measures/history_measures_page.dart';
@@ -55,6 +56,8 @@ class AppDrawer extends StatelessWidget {
               iconColor: Colors.black,
               title: const Text('Historial de medidas'),
               onTap: () {
+                Provider.of<RecordsMeasuresProvider>(context, listen: false)
+                    .getAllRecords();
                 Navigator.pop(context);
                 Navigator.push(
                   context,
