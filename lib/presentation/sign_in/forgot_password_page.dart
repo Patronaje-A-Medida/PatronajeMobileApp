@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:patronaje_mobile_app/business/auth/auth_provider.dart';
 import 'package:patronaje_mobile_app/business/shared/forgot_password_provider.dart';
+import 'package:patronaje_mobile_app/domain/handlers/exceptions/general_exception.dart';
+import 'package:patronaje_mobile_app/domain/utils/enums/general_enums.dart';
 import 'package:patronaje_mobile_app/presentation/shared/app_filled_button.dart';
+import 'package:patronaje_mobile_app/presentation/shared/custom_snackbar.dart';
+import 'package:patronaje_mobile_app/presentation/shared/loading_primary_button.dart';
 import 'package:provider/provider.dart';
 
 class ForgotPasswordPage extends StatelessWidget {
@@ -10,6 +15,8 @@ class ForgotPasswordPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
     final forgotPwdProvider = Provider.of<ForgotPasswordProvider>(context);
+    final authProvider = Provider.of<AuthProvider>(context);
+
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
@@ -52,15 +59,48 @@ class ForgotPasswordPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 24),
-              AppFilledButton(
-                text: 'Cambiar contraseña',
-                minimunSize: const Size.fromHeight(36),
-                onPressed: () {
-                  FocusManager.instance.primaryFocus?.unfocus();
+              authProvider.isLoading
+                  ? const LoadingPrimaryButton(minimunSize: Size.fromHeight(36))
+                  : AppFilledButton(
+                      text: 'Cambiar contraseña',
+                      minimunSize: const Size.fromHeight(36),
+                      onPressed: () async {
+                        FocusManager.instance.primaryFocus?.unfocus();
 
-                  if (!_formKey.currentState!.validate()) return;
-                },
-              ),
+                        if (!_formKey.currentState!.validate()) return;
+
+                        try {
+                          final result = await authProvider
+                              .resetPassword(forgotPwdProvider.email);
+                          if (!result) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              makeSnackBar(
+                                type: AlertType.error,
+                                message:
+                                    'No se pudo restablecer las credenciales.',
+                              ),
+                            );
+                            return;
+                          }
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            makeSnackBar(
+                              type: AlertType.success,
+                              message:
+                                  'Se envió un correo con las credenciales restablecidas.',
+                            ),
+                          );
+                          return;
+                        } on GeneralException catch (_) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            makeSnackBar(
+                              type: AlertType.error,
+                              message:
+                                  'No se pudo restablecer las credenciales.',
+                            ),
+                          );
+                        }
+                      },
+                    ),
             ]),
           ),
         ),

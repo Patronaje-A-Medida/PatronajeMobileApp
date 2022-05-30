@@ -118,19 +118,22 @@ class AuthRepository extends BaseAuthRepository {
   }
 
   @override
-  Future<bool> retrieveCredentials(String email) {
-    /*try {
-      const url = _baseUrl + '/sign-up/users-client';
-      final request = userCreate.toJson();
-      final response = await _dio.post(url, data: request);
+  Future<bool> resetPassword(String email) async {
+    try {
+      const url = _baseUrl + '/profiles/reset-password';
+
+      FormData formData = FormData.fromMap({
+        'userEmail': email,
+      });
+
+      final response = await _dio.post(url, data: formData);
 
       if (response.statusCode != 200) {
         final errorResponse = ErrorDetail.fromMap(response.data);
         throw GeneralException.fromErrorResponse(errorResponse);
       }
 
-      final userClientToken = UserClientToken.fromMap(response.data);
-      return userClientToken;
+      return response.data;
     } on DioError catch (err) {
       final errorResponse = ErrorDetail.fromMap(err.response?.data);
       throw GeneralException.fromErrorResponse(errorResponse);
@@ -138,6 +141,6 @@ class AuthRepository extends BaseAuthRepository {
       throw GeneralException(message: err.message, errorCode: 500);
     } on Exception catch (_) {
       rethrow;
-    }*/
+    }
   }
 }

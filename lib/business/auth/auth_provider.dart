@@ -78,11 +78,11 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  Future<bool> retrieveCredentials(String email) async {
+  Future<bool> resetPassword(String email) async {
     try {
       _isLoading = true;
       notifyListeners();
-      final result = await _authRepository.retrieveCredentials(email);
+      final result = await _authRepository.resetPassword(email);
       _isLoading = false;
       notifyListeners();
       return result;

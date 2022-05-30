@@ -27,52 +27,58 @@ class HomePage extends StatelessWidget {
                 child: _greetings(
                     '${userProvider.userData.names} ${userProvider.userData.lastNames}'),
               ),
-              InkWell(
-                onTap: () {
-                  if (userProvider.firstTakeMeasure) {
-                    Navigator.push(
-                      context,
-                      TransitionPageRoute(
-                        child: const OnBoardingMeasuresPage(),
-                        direction: AxisDirection.up,
+              Flexible(
+                child: ListView(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        if (userProvider.firstTakeMeasure) {
+                          Navigator.push(
+                            context,
+                            TransitionPageRoute(
+                              child: const OnBoardingMeasuresPage(),
+                              direction: AxisDirection.up,
+                            ),
+                          );
+                        }
+                      },
+                      child: Card(
+                        semanticContainer: true,
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0)),
+                        elevation: 5,
+                        margin: const EdgeInsets.all(18),
+                        child: Image.asset(
+                          'assets/images/toma_medidas_btn.png',
+                          fit: BoxFit.fill,
+                        ),
                       ),
-                    );
-                  }
-                },
-                child: Card(
-                  semanticContainer: true,
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0)),
-                  elevation: 5,
-                  margin: const EdgeInsets.all(18),
-                  child: Image.asset(
-                    'assets/images/toma_medidas_btn.png',
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    TransitionPageRoute(
-                      child: const HistoryMeasuresPage(),
-                      direction: AxisDirection.up,
                     ),
-                  );
-                },
-                child: Card(
-                  semanticContainer: true,
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0)),
-                  elevation: 5,
-                  margin: const EdgeInsets.all(18),
-                  child: Image.asset(
-                    'assets/images/historial_medidas_btn.png',
-                    fit: BoxFit.fill,
-                  ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          TransitionPageRoute(
+                            child: const HistoryMeasuresPage(),
+                            direction: AxisDirection.up,
+                          ),
+                        );
+                      },
+                      child: Card(
+                        semanticContainer: true,
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0)),
+                        elevation: 5,
+                        margin: const EdgeInsets.symmetric(horizontal: 18),
+                        child: Image.asset(
+                          'assets/images/historial_medidas_btn.png',
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
