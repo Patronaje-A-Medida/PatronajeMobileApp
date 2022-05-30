@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:patronaje_mobile_app/business/shared/navigation_provider.dart';
-import 'package:patronaje_mobile_app/domain/utils/themes/color_theme.dart';
 import 'package:patronaje_mobile_app/presentation/catalogue/catalogue_page.dart';
 import 'package:patronaje_mobile_app/presentation/home/home_page.dart';
 import 'package:patronaje_mobile_app/presentation/orders/orders_page.dart';
@@ -30,13 +29,13 @@ class AppMainPages extends StatelessWidget {
         }
       },*/
       physics: const NeverScrollableScrollPhysics(),
-      children: [
-        const HomePage(),
-        Container(
+      children: const [
+        HomePage(),
+        /*Container(
           color: Palette.green.shade200,
-        ),
-        const CataloguePage(),
-        const OrdersPage(),
+        ),*/
+        CataloguePage(),
+        OrdersPage(),
       ],
     );
   }

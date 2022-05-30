@@ -10,6 +10,7 @@ import 'package:patronaje_mobile_app/presentation/shared/custom_snackbar.dart';
 import 'package:patronaje_mobile_app/presentation/shared/app_filled_button.dart';
 import 'package:patronaje_mobile_app/presentation/shared/loading_primary_button.dart';
 import 'package:patronaje_mobile_app/presentation/shared/transition_page_route.dart';
+import 'package:patronaje_mobile_app/presentation/sign_in/forgot_password_page.dart';
 import 'package:patronaje_mobile_app/presentation/sign_up/sign_up_page.dart';
 import 'package:provider/provider.dart';
 
@@ -58,13 +59,23 @@ class SignInForm extends StatelessWidget {
               padding: const EdgeInsets.only(top: 6.0, bottom: 12.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: const [
-                  Text(
-                    '¿Olvidaste tu contraseña?',
-                    textAlign: TextAlign.end,
-                    style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      fontSize: 12.0,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        TransitionPageRoute(
+                            child: const ForgotPasswordPage(),
+                            direction: AxisDirection.left),
+                      );
+                    },
+                    child: const Text(
+                      '¿Olvidaste tu contraseña?',
+                      textAlign: TextAlign.end,
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        fontSize: 12.0,
+                      ),
                     ),
                   ),
                 ],

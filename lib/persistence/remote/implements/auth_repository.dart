@@ -116,4 +116,28 @@ class AuthRepository extends BaseAuthRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<bool> retrieveCredentials(String email) {
+    /*try {
+      const url = _baseUrl + '/sign-up/users-client';
+      final request = userCreate.toJson();
+      final response = await _dio.post(url, data: request);
+
+      if (response.statusCode != 200) {
+        final errorResponse = ErrorDetail.fromMap(response.data);
+        throw GeneralException.fromErrorResponse(errorResponse);
+      }
+
+      final userClientToken = UserClientToken.fromMap(response.data);
+      return userClientToken;
+    } on DioError catch (err) {
+      final errorResponse = ErrorDetail.fromMap(err.response?.data);
+      throw GeneralException.fromErrorResponse(errorResponse);
+    } on SocketException catch (err) {
+      throw GeneralException(message: err.message, errorCode: 500);
+    } on Exception catch (_) {
+      rethrow;
+    }*/
+  }
 }

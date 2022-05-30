@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class NavigationProvider extends ChangeNotifier {
   final List<String> _titles = [
-    'Home',
+    //'Home',
     'Medidas',
     'Catálogo',
     'Órdenes',

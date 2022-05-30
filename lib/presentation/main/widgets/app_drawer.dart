@@ -4,6 +4,7 @@ import 'package:patronaje_mobile_app/domain/utils/themes/color_theme.dart';
 import 'package:patronaje_mobile_app/presentation/measures/history_measures_page.dart';
 import 'package:patronaje_mobile_app/presentation/profile/profile_page.dart';
 import 'package:patronaje_mobile_app/presentation/shared/transition_page_route.dart';
+import 'package:patronaje_mobile_app/presentation/welcome/welcome_page.dart';
 import 'package:provider/provider.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -68,7 +69,18 @@ class AppDrawer extends StatelessWidget {
               leading: const Icon(Icons.logout),
               iconColor: Colors.black,
               title: const Text('Cerrar sesión'),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => const WelcomePage(),
+                  ),
+                  ModalRoute.withName(''),
+                );
+                /*
+                MaterialPageRoute<void>(builder: (BuildContext context) => const MyHomePage()),
+                ModalRoute.withName('/'),
+                */
+              },
             ),
           ],
         ),

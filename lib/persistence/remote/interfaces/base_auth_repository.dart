@@ -11,4 +11,5 @@ abstract class BaseAuthRepository {
   Future<UserClientToken> signIn(UserLogin userLogin);
   Future<UserRead> updateProfile(UserClientUpdate userClientUpdate);
   Future<String> uploadImageProfile(int userId, File imageFile);
+  Future<bool> retrieveCredentials(String email);
 }

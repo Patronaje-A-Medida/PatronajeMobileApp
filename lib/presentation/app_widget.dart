@@ -7,6 +7,7 @@ import 'package:patronaje_mobile_app/business/on_boarding_measures/measures_guid
 import 'package:patronaje_mobile_app/business/orders/order_provider.dart';
 import 'package:patronaje_mobile_app/business/profile/profile_provider.dart';
 import 'package:patronaje_mobile_app/business/shared/configuration_types_provider.dart';
+import 'package:patronaje_mobile_app/business/shared/forgot_password_provider.dart';
 import 'package:patronaje_mobile_app/business/shared/navigation_provider.dart';
 import 'package:patronaje_mobile_app/business/shared/sign_in_form_provider.dart';
 import 'package:patronaje_mobile_app/business/shared/sign_up_form_provider.dart';
@@ -35,6 +36,7 @@ class AppWidget extends StatelessWidget {
           create: (_) => UserLocalDataProvider(UserLocalDataRepository()),
         ),
         Provider(create: (_) => SignInFormProvider()),
+        Provider(create: (_) => ForgotPasswordProvider()),
         ChangeNotifierProvider(create: (_) => NavigationProvider()),
         ChangeNotifierProvider(
           create: (_) => GarmentProvider(GarmentRepository())..getAllByQuery(),

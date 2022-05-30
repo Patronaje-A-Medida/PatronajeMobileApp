@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:patronaje_mobile_app/domain/models/measures/measures_temp.dart';
 
 class HistoryMeasuresPage extends StatelessWidget {
   const HistoryMeasuresPage({Key? key}) : super(key: key);

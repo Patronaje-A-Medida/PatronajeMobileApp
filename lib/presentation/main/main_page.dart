@@ -22,6 +22,8 @@ class MainPage extends StatelessWidget {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
+        /*extendBodyBehindAppBar:
+            navigationProvider.currentPage == 0 ? true : false,*/
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text(navigationProvider.currentTitlePage),

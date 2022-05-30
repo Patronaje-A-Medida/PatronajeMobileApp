@@ -20,7 +20,7 @@ class AppNavigationBar extends StatelessWidget {
 
         navigationProvider.currentPage = value;
 
-        if (value == 1 && userDataProvider.firstTakeMeasure) {
+        /*if (value == 1 && userDataProvider.firstTakeMeasure) {
           Navigator.push(
             context,
             TransitionPageRoute(
@@ -28,15 +28,15 @@ class AppNavigationBar extends StatelessWidget {
               direction: AxisDirection.up,
             ),
           );
-        }
+        }*/
       },
       selectedItemColor: Theme.of(context).colorScheme.primary,
       unselectedItemColor: Colors.grey,
       items: const [
-        BottomNavigationBarItem(
+        /*BottomNavigationBarItem(
           icon: Icon(Icons.home_rounded),
           label: 'Inicio',
-        ),
+        ),*/
         BottomNavigationBarItem(
           icon: Icon(Icons.accessibility_new_rounded),
           label: 'Medidas',

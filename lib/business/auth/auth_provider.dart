@@ -77,4 +77,20 @@ class AuthProvider extends ChangeNotifier {
       rethrow;
     }
   }
+
+  Future<bool> retrieveCredentials(String email) async {
+    try {
+      _isLoading = true;
+      notifyListeners();
+      final result = await _authRepository.retrieveCredentials(email);
+      _isLoading = false;
+      notifyListeners();
+      return result;
+    } on GeneralException catch (err) {
+      _isLoading = false;
+      _errorMessage = err.message;
+      notifyListeners();
+      rethrow;
+    }
+  }
 }

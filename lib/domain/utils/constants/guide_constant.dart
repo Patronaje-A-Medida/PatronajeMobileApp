@@ -5,7 +5,7 @@ final List<MeasuresStep> measuresGuide = [
     image: 'assets/images/meditation.png',
     title: 'Usa ropa ajustada',
     description:
-        'Para obtener una mejor precisión de tus medidas corporales (como ancho de cintura o cadera) debes usar prendas como un polo/ ajustado y una malla deportiva',
+        'Para obtener una mejor precisión de tus medidas corporales (como ancho de cintura o cadera) debes usar prendas como un polo ajustado y una malla deportiva',
   ),
   MeasuresStep(
     image: 'assets/images/yoga-pose.png',
