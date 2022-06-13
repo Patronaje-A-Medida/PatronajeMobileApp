@@ -14,23 +14,16 @@ class BasketProvider extends ChangeNotifier {
 
   OrderCreate? _newOrder;
   List<GarmentRead> _garmentsTemp = [];
+  List<OrderDetailCreate> _detailsTemp = [];
   bool canMakeOrder = false;
 
   OrderCreate? get newOrder => _newOrder;
   List<GarmentRead> get garmentsSelected => _garmentsTemp;
+  List<OrderDetailCreate> get detailsGarmentsSelected => _detailsTemp;
 
   void addItemToOrder(GarmentRead garment, String color) {
     final item = OrderDetailCreate(garmentId: garment.id, color: color);
-
-    final userData = _userLocalDataRepository.getUserLocalData();
-
-    _newOrder ??= OrderCreate(
-      orderDate: DateTime.now(),
-      userClientId: userData.id,
-      details: [],
-    );
-
-    _newOrder?.details.add(item);
+    _detailsTemp.add(item);
     final copyGarment = garment.copyWith();
     _garmentsTemp.add(copyGarment);
     notifyListeners();
@@ -38,6 +31,12 @@ class BasketProvider extends ChangeNotifier {
 
   Future<bool> createOrder() async {
     try {
+      final userData = _userLocalDataRepository.getUserLocalData();
+      _newOrder = OrderCreate(
+        orderDate: DateTime.now(),
+        userClientId: userData.id,
+        details: _detailsTemp,
+      );
       final result = _orderRepository.createOrder(_newOrder!);
       //notifyListeners();
       return result;
@@ -47,7 +46,15 @@ class BasketProvider extends ChangeNotifier {
   }
 
   resetBasket() {
-    _newOrder = null;
+    //_newOrder = null;
+    _detailsTemp.clear();
     _garmentsTemp.clear();
+    notifyListeners();
+  }
+
+  removeItem(int index) {
+    _detailsTemp.removeAt(index);
+    _garmentsTemp.removeAt(index);
+    notifyListeners();
   }
 }

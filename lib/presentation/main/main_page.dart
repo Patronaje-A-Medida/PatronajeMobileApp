@@ -28,12 +28,11 @@ class MainPage extends StatelessWidget {
           automaticallyImplyLeading: false,
           title: Text(navigationProvider.currentTitlePage),
           actions: [
-            if (basketProvider.newOrder != null &&
-                basketProvider.newOrder!.details.isNotEmpty)
+            if (basketProvider.garmentsSelected.isNotEmpty)
               IconButton(
                 icon: Badge(
                   badgeContent:
-                      Text(basketProvider.newOrder!.details.length.toString()),
+                      Text(basketProvider.garmentsSelected.length.toString()),
                   child: const Icon(Icons.shopping_cart_rounded),
                   padding:
                       const EdgeInsets.symmetric(vertical: 0, horizontal: 5),

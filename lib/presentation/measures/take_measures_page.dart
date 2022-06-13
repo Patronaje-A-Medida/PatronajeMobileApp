@@ -77,7 +77,7 @@ class TakeMeasuresPage extends StatelessWidget {
                       Icons.lightbulb,
                       color: Palette.yellow.shade600,
                     ),
-                    onPressed: () => _showDialog(
+                    onPressed: () => _showDialogGuide(
                       context: context,
                       heightImage: sizeH * 0.4,
                       isFrontal: true,
@@ -106,8 +106,11 @@ class TakeMeasuresPage extends StatelessWidget {
               AppFilledButton(
                 text: '',
                 icon: Icons.camera_alt_rounded,
-                onPressed: () =>
-                    takeMeasuresProvider.takePhotoFrontal(source: 1),
+                onPressed: () => _showPictureTakeMode(
+                  context: context,
+                  provider: takeMeasuresProvider,
+                  frontalImage: true,
+                ),
               ),
               const SizedBox(height: 12),
               Row(
@@ -153,7 +156,7 @@ class TakeMeasuresPage extends StatelessWidget {
                       Icons.lightbulb,
                       color: Palette.yellow.shade600,
                     ),
-                    onPressed: () => _showDialog(
+                    onPressed: () => _showDialogGuide(
                       context: context,
                       heightImage: sizeH * 0.4,
                       isFrontal: false,
@@ -182,8 +185,11 @@ class TakeMeasuresPage extends StatelessWidget {
               AppFilledButton(
                 text: '',
                 icon: Icons.camera_alt_rounded,
-                onPressed: () =>
-                    takeMeasuresProvider.takePhotoLateral(source: 1),
+                onPressed: () => _showPictureTakeMode(
+                  context: context,
+                  provider: takeMeasuresProvider,
+                  frontalImage: false,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 12.0),
@@ -217,7 +223,7 @@ class TakeMeasuresPage extends StatelessWidget {
     );
   }
 
-  Future<void> _showDialog({
+  Future<void> _showDialogGuide({
     required BuildContext context,
     required double heightImage,
     required bool isFrontal,
@@ -257,5 +263,63 @@ class TakeMeasuresPage extends StatelessWidget {
             ],
           );
         });
+  }
+
+  Future<void> _showPictureTakeMode({
+    required BuildContext context,
+    required TakeMeasuresProvider provider,
+    required bool frontalImage,
+  }) async {
+    return showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(vertical: 12.0, horizontal: 18.0),
+            child: TextButton(
+              style: TextButton.styleFrom(primary: Palette.green.shade300),
+              child: Row(
+                children: const [
+                  Icon(Icons.camera_alt_rounded),
+                  SizedBox(width: 8),
+                  Text('Desde cámara'),
+                ],
+              ),
+              onPressed: () {
+                frontalImage
+                    ? provider.takePhotoFrontal(source: 1)
+                    : provider.takePhotoLateral(source: 1);
+                Navigator.pop(context);
+              },
+            ),
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.only(bottom: 12.0, left: 18.0, right: 18.0),
+            child: TextButton(
+                style: TextButton.styleFrom(primary: Palette.green.shade300),
+                child: Row(
+                  children: const [
+                    Icon(Icons.filter),
+                    SizedBox(width: 8),
+                    Text('Desde galería'),
+                  ],
+                ),
+                onPressed: () {
+                  frontalImage
+                      ? provider.takePhotoFrontal(source: 2)
+                      : provider.takePhotoLateral(source: 2);
+                  Navigator.pop(context);
+                }),
+          ),
+        ],
+      ),
+    );
   }
 }

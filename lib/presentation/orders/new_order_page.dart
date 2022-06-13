@@ -39,10 +39,10 @@ class NewOrderPage extends StatelessWidget {
           children: [
             Expanded(
               child: ListView.builder(
-                itemCount: basketProvider.newOrder!.details.length,
+                itemCount: basketProvider.garmentsSelected.length,
                 itemBuilder: (context, index) {
                   final garment = basketProvider.garmentsSelected[index];
-                  final detail = basketProvider.newOrder!.details[index];
+                  final detail = basketProvider.detailsGarmentsSelected[index];
                   return Card(
                     elevation: 8,
                     shadowColor: Colors.black45,
@@ -96,6 +96,20 @@ class NewOrderPage extends StatelessWidget {
                                           Theme.of(context).textTheme.caption,
                                     ),
                                     Text('S/ ${garment.firstRangePrice}'),
+                                  ],
+                                ),
+                                const SizedBox(height: 16.0),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    InkWell(
+                                      onTap: () =>
+                                          basketProvider.removeItem(index),
+                                      child: const Icon(
+                                        Icons.delete,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ],
