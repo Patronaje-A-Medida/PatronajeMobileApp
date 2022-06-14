@@ -35,7 +35,7 @@ class MeasurementRepository implements BaseMeasurementRepository {
         'height': height,
       });
 
-      final fname = '$userId-${DateTime.now()}';
+      final fname = '${DateTime.now()}-$userId';
 
       FormData formData2 = FormData.fromMap({
         'file_frontal': await MultipartFile.fromFile(imageFrontal.path,
@@ -44,7 +44,7 @@ class MeasurementRepository implements BaseMeasurementRepository {
             filename: 'lateral-$fname'),
       });
 
-      _dio.post(url2, data: formData2);
+      await _dio.post(url2, data: formData2);
 
       final response = await _dio.post(url, data: formData);
 
