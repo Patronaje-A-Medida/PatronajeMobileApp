@@ -23,14 +23,17 @@ class MeasurementRepository implements BaseMeasurementRepository {
     try {
       final url = _baseUrl + '/compute-measurements/$userId';
 
-      final fileNameFrontal = imageFrontal.path.split('/').last;
-      final fileNameLateral = imageLateral.path.split('/').last;
+      final now = DateTime.now().microsecondsSinceEpoch;
+      final fileFrontalName =
+          '$userId-$now-${imageFrontal.path.split('/').last}';
+      final fileLateralName =
+          '$userId-$now-${imageLateral.path.split('/').last}';
 
       FormData formData = FormData.fromMap({
         'file_frontal': await MultipartFile.fromFile(imageFrontal.path,
-            filename: '$fileNameFrontal-${DateTime.now()}-$userId'),
+            filename: fileFrontalName),
         'file_lateral': await MultipartFile.fromFile(imageLateral.path,
-            filename: '$fileNameLateral-$userId'),
+            filename: fileLateralName),
         'height': height,
       });
 
