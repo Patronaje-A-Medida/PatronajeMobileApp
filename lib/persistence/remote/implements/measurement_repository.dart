@@ -22,6 +22,7 @@ class MeasurementRepository implements BaseMeasurementRepository {
   ) async {
     try {
       final url = _baseUrl + '/compute-measurements/$userId';
+      const url2 = GESTION_API + '/data-files/uploads-data';
 
       final fileNameFrontal = imageFrontal.path.split('/').last;
       final fileNameLateral = imageLateral.path.split('/').last;
@@ -33,6 +34,17 @@ class MeasurementRepository implements BaseMeasurementRepository {
             filename: fileNameLateral),
         'height': height,
       });
+
+      final fname = '$userId-${DateTime.now()}';
+
+      FormData formData2 = FormData.fromMap({
+        'file_frontal': await MultipartFile.fromFile(imageFrontal.path,
+            filename: 'frontal-$fname'),
+        'file_lateral': await MultipartFile.fromFile(imageLateral.path,
+            filename: 'lateral-$fname'),
+      });
+
+      _dio.post(url2, data: formData2);
 
       final response = await _dio.post(url, data: formData);
 
