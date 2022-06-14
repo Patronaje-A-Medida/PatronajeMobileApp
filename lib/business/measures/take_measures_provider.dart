@@ -60,7 +60,8 @@ class TakeMeasuresProvider extends ChangeNotifier {
 
   Future<File?> takePhoto({int source = 1}) async {
     final sourceType = source == 1 ? ImageSource.camera : ImageSource.gallery;
-    final photo = await ImagePicker().pickImage(source: sourceType);
+    final photo =
+        await ImagePicker().pickImage(source: sourceType, imageQuality: 75);
     if (photo == null) return null;
     return File(photo.path);
   }
