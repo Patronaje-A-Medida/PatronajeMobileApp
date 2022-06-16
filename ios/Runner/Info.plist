@@ -47,5 +47,9 @@
 	<string>App needs access to photo lib for images</string>
 	<key>NSCameraUsageDescription</key>
 	<string>To capture body photo please grant camera access</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key><true/>
+	</dict>
 </dict>
 </plist>
